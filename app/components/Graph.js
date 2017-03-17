@@ -31,8 +31,8 @@ var Notification = require('grommet/components/Notification');
 var Timestamp = require('grommet/components/Timestamp');
 var NumberInput = require('grommet/components/NumberInput');
 var Quote = require('grommet/components/Quote');
-var Sunburst = require('grommet/components/Sunburst');
-var Worldmap = require('grommet/components/Worldmap');
+//var Sunburst = require('grommet/components/Sunburst');
+//var Worldmap = require('grommet/components/Worldmap');
 
 /* ZingChart */
 require('zingchart/client/zingchart.min.js');

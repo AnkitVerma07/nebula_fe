@@ -6,7 +6,7 @@ var Grommet = require('grommet/components/Grommet');
 var Heading = require('grommet/components/Heading');
 var Button = require('grommet/components/Button');
 var Paragraph = require('grommet/components/Paragraph');
-var Checkbox = require('grommet/components/Checkbox');
+//var Checkbox = require('grommet/components/Checkbox');
 
 /* SASS includes */
 require('../styles/cityInternships.scss');

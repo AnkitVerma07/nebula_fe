@@ -21,7 +21,7 @@ var Anchor = require('grommet/components/Anchor');
 var Menu = require('grommet/components/Menu');
 var Calendar = require('grommet/components/Calendar');
 var RadioButton = require('grommet/components/RadioButton');
-var Checkbox = require('grommet/components/Checkbox');
+//var Checkbox = require('grommet/components/Checkbox');
 
 /* SASS includes */
 require('../../styles/application.scss');

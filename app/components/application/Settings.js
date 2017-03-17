@@ -10,7 +10,7 @@ var Menu = require('grommet/components/Menu');
 var RadioButton = require('grommet/components/RadioButton');
 var Button = require('grommet/components/Button');
 var FormField = require('grommet/components/FormField');
-var Checkbox = require('grommet/components/Checkbox');
+//var Checkbox = require('grommet/components/Checkbox');
 
 var InputField = require('../../components/supportComponents/Fields.js').InputField;
 var SelectField = require('../../components/supportComponents/Fields.js').SelectField;
