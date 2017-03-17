@@ -1,0 +1,185 @@
+$footerWidth: 100vw;
+$footerHeight: 8vh;
+$footerBackgroundColor: #1C2600;
+$footerLinkWidth: 25%;
+$footerFontSize: 1vw;
+$linksWidth: 40%;
+$fillerWidth: 5%;
+$ourServicesWidth: 35%;
+$ourServicesDivWidth: 50%;
+$ourServicesFontSize: 1.2vw;
+$ourServicesLinkWidth: 25%;
+$ourServicesLinkFontSize: 1vw;
+$ourServicesLabelColor: #3D4E64;
+$socialMediaWidth: 15%;
+$socialMediaLinkWidth: 25%;
+$socialMediaImgWidth: 20px;
+$socialMediaImgHeight: 20px;
+
+$smallestWidth: 361px;
+$tabletWidth: 600px;
+$smallestHeight: 601px;
+$largestHeight: 1000px;
+
+$mobileFooterLinksHeight: 50%;
+$mobileFooterAnchorFontSize: 2.5vw;
+$mobileOurServicesWidth: 70%;
+$mobileOurServicesFontSize: 3vw;
+$mobileOurServicesLinkFontSize: 2.5vw;
+$mobileOurServicesLinkWidth: 10%;
+$mobileSocialMediaWidth: 30%;
+$largeScreenOurServicesMargin: 10%;
+
+
+.footer {
+    height: $footerHeight;
+    bottom: 0px;
+    width: 100vw;
+    position: relative;
+    float: left;
+
+    footer {
+        bottom: 0;
+        width: $footerWidth;
+        height: $footerHeight;
+        background-color: $footerBackgroundColor;
+
+        .links {
+            width: $linksWidth;
+            height: 100%;
+            float: left;
+            display: table;
+
+            a {
+                display: table-cell;
+                text-align: center;
+                vertical-align: middle;
+                width: $footerLinkWidth;
+                height: 100%;
+                color: white !important;
+                font-weight: 100;
+                font-size: $footerFontSize;
+            }
+        }
+
+        .filler {
+            width: $fillerWidth;
+            height: 100%;
+            float: left;
+        }
+
+        .ourServices {
+            width: $ourServicesWidth;
+            height: 100%;
+            float: left;
+            display: table;
+
+            .students, .employers {
+                width: $ourServicesDivWidth;
+                height: 100%;
+                text-align: center;
+                display: table-cell;
+                vertical-align: middle;
+                
+                label {
+                    margin: 0;
+                    font-size: $ourServicesFontSize;
+                    color: $ourServicesLabelColor;
+                }
+
+                a {
+                    display: table-cell;
+                    text-align: center;
+                    width: $ourServicesLinkWidth;
+                    height: 100%;
+                    color: white !important;
+                    font-weight: 100;
+                    font-size: $ourServicesLinkFontSize;
+                }
+            }
+        }
+
+        .socialMedia {
+            width: $socialMediaWidth;
+            height: 100%;
+            float: left;
+            display: table;
+
+            a {
+                display: table-cell;
+                width: $socialMediaLinkWidth;
+                height: 100%;
+                vertical-align: middle;
+                text-align: center;
+                outline: 0;
+
+                img, svg {
+                    width: $socialMediaImgWidth;
+                    height: $socialMediaImgHeight;
+                    margin-top: $svgMargin;
+                }
+
+                svg {
+                    background-color: white;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $tabletWidth) {
+    .footer {
+        footer {
+            .links {
+                width: 100% !important;
+                height: $mobileFooterLinksHeight !important;
+                background-color: $footerBackgroundColor;
+
+                a {
+                    font-size: $mobileFooterAnchorFontSize !important;
+                }
+            }
+
+            .ourServices {
+                width: $mobileOurServicesWidth !important;
+                background-color: $footerBackgroundColor;
+
+                .students, .employers {
+                    label {
+                        font-size: $mobileOurServicesFontSize !important;
+                    }
+
+                    a {
+                        width: $mobileOurServicesLinkWidth !important;
+                        font-size: $mobileOurServicesLinkFontSize !important;
+                    }
+                }
+            }
+
+            .socialMedia {
+                width: $mobileSocialMediaWidth !important;
+                background-color: $footerBackgroundColor;
+
+                a {
+                    vertical-align: top !important;
+                }
+            }
+
+            .filler {
+                width: 0 !important;
+            }
+        }
+    }
+}
+
+@media screen and (min-height: $largestHeight) {
+    .footer {
+        footer {
+            .ourServices {
+                .students, .employers {
+                    margin-top: $largeScreenOurServicesMargin;
+                }
+            }
+        }
+    }
+}

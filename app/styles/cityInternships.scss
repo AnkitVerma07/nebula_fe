@@ -1,0 +1,32 @@
+$headerPadding: 2em;
+$checkboxPadding: 1em;
+
+.cityInternships {
+	background-color: aliceblue;
+	width: 100vw;
+	height: 100vh;
+
+	text-align: center;
+	width: 100%;
+
+	header {
+		font-weight: 100;
+		padding: $headerPadding;
+	}
+
+	div {
+		width: 100vw;
+		p {
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		.para2 {
+			margin-top: $headerPadding;
+		}
+
+		.grommetux-check-box__control {
+			margin-top: $checkboxPadding;
+		}
+	}
+}

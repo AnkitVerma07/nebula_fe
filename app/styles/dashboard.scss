@@ -1,0 +1,30 @@
+$headerPadding: 2em;
+$buttonMarginTop: 3em;
+$paragraphLeft: 34%;
+
+.dashboard {
+	background-color: aliceblue;
+	width: 100vw;
+	height: 100vh;
+
+	text-align: center;
+	width: 100%;
+
+	.grommet p {
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	header {
+		font-weight: 100;
+		padding: $headerPadding;
+	}
+
+	button {
+		margin-top: $buttonMarginTop;
+	}
+
+	input[type="file"] {
+		display: none;
+	}
+}

@@ -1,0 +1,594 @@
+$headerColor: #1C2631;
+$headerWidth: 150px;
+$headerMargin: 15px;
+$headerHeight: 60px;
+
+$tabHeight: 60px;
+$tabWidth: 20%;
+$tabBorder: 4px solid white;
+$activeTabColor: #3D4E64;
+$inactiveTabColor: #E8E8E8;
+$submitColor: #13D571;
+
+$mainPadding: 1%;
+$titleWidth: 98%;
+$titleHeight: 40px;
+$titleFont: 2em;
+$titleFontWeight: 100;
+$titlePaddingLeft: 10%;
+$firstDivMargin: 2em;
+
+$sidebarMargin: 1%;
+$sidebarWidth: 35%;
+$sidebarHeight: 100px;
+$sidebarNavMargin: 1em;
+$sidebarRBMargin: 12px;
+$sidebarRBPadding: 5%;
+$sidebarRBWidth: 80%;
+$sidebarRBFontSize: 0.75em;
+$radioButtonMargin: 10px;
+
+$contentWidth: 30%;
+$contentLeft: 35%;
+$contentMargin: 5em;
+$contentMarginRight: 35%;
+$contentPadding: 5em;
+$contentButtonMargin: 10px;
+$contentButtonHeight: 60px;
+
+$addressCityWidth: 70%;
+$addressStateWidth: 30%;
+$addressCountryWidth: 60%;
+$addressZipcodeWidth: 40%;
+$gradWidth: 50%;
+$deleteAccountMargin: 10em;
+$collegeMargin: 10em;
+
+$starSVGWidth: 7em;
+$starSVGHeight: 7em;
+$starSetHeight: 30px;
+$starWidth: 20%;
+$starMarginLeft: 2%;
+$starMarginTop: 10px;
+
+$aboutMeMargin: 10em;
+$aboutmeButtonHeight: 60px;
+$aboutmeButtonMargin: 10px;
+
+$imgPadding: 3em;
+$profilePhotoWidth: 300px;
+$profilePhotoHeight: 500px;
+$innerFillerHeight: 300px;
+$outerFillerHeight: 100px;
+$outerFillerWidth: 24%;
+
+$footerWidth: 100vw;
+$footerHeight: 70px;
+$footerBackgroundColor: #1C2600;
+$footerLinkWidth: 25%;
+$footerFontSize: 1vw;
+$linksWidth: 40%;
+$fillerWidth: 5%;
+$ourServicesWidth: 35%;
+$ourServicesDivWidth: 50%;
+$ourServicesFontSize: 1.2vw;
+$ourServicesLinkWidth: 25%;
+$ourServicesLinkFontSize: 1vw;
+$ourServicesLabelColor: #3D4E64;
+$socialMediaWidth: 15%;
+$socialMediaLinkWidth: 25%;
+$socialMediaImgWidth: 20px;
+$socialMediaImgHeight: 20px;
+
+$tabletWidth: 600px;
+
+$mobileTitleFontSize: 1.5em;
+$mobileContentMargin: 15%;
+$mobileContentWidth: 50%;
+$mobileContentLeft: 35%;
+$mobileOurServicesWidth: 70%;
+$mobileSidebarLabelWidth: 125px;
+$mobileFooterLinksHeight: 50%;
+$mobileFooterLinksFontSize: 2.5vw;
+$mobileFooterLabelFontSize: 3vw;
+$mobileFooterLinkWidth: 10%;
+$mobileFooterLinkFontSize: 2.5vw;
+$mobileSocialMediaWidth: 30%;
+
+.application {
+	header {
+		background-color: $headerColor;
+		height: $headerHeight;
+
+		img {
+			width: $headerWidth;
+			margin: $headerMargin;
+		}
+	}
+
+	.tabs {
+		text-align: center;
+		width: 100%;
+		min-height: 100%;
+		margin: 0 auto -$footerHeight;
+
+		ul {
+			border-bottom: 0;
+			margin-top: 0;
+			max-height: $tabHeight;
+
+			li {
+				height: $tabHeight;
+				width: $tabWidth;
+				background-color: $inactiveTabColor;
+				border-right: $tabBorder;
+				border-top: 0;
+				display: table;
+
+				a {
+					display: table-cell;
+					vertical-align: middle;
+				}
+			}
+
+			.grommetux-tab--active {
+				background-color: $activeTabColor;
+				label {
+					color: white;
+				}
+			}
+		}
+
+		.main {
+			text-align: center;
+			width: 100%;
+			padding: $mainPadding;
+			overflow: auto;
+			margin: 0 auto;
+
+			.title {
+				width: $titleWidth;
+				height: $titleHeight;
+				margin: 0 auto;
+				display: table;
+				text-align: left;
+
+				label {
+					padding-left: $titlePaddingLeft;
+					display: table-cell;
+					vertical-align: middle;
+					font-size: $titleFont;
+					font-weight: $titleFontWeight;
+					color: $activeTabColor;
+				}
+			}
+
+			.sidebar {
+				margin-left: $sidebarMargin;
+				width: $sidebarWidth;
+				min-height: $sidebarHeight;
+				float: left;
+				position: fixed;
+
+				nav {
+					margin-top: $sidebarNavMargin;
+					text-align: right;
+
+					label {
+						margin-bottom: 0;
+						margin-top: $sidebarRBMargin;
+						font-size: $sidebarRBFontSize;
+						width: $sidebarRBWidth;
+						color: $activeTabColor;
+						padding-left: $sidebarRBPadding;
+					}
+
+					label * {
+						color: $activeTabColor;
+					}
+
+					.grommetux-radio-button__control {
+						float: right;
+						margin-left: $radioButtonMargin;
+					}
+
+					.grommetux-radio-button__label {
+						white-space: pre-line;
+						display: none;
+					}
+
+					.grommetux-radio-button__control:hover~.grommetux-radio-button__label {
+						display: block !important;
+					}
+
+					.grommetux-radio-button__input:checked + .grommetux-radio-button__control {
+						color: $activeTabColor;
+						border-color: $activeTabColor;
+						border-color: $activeTabColor;
+					}
+
+					.grommetux-radio-button__control::after {
+						background-color: $activeTabColor;
+					}
+					
+					a:hover {
+						color: black;
+						cursor: pointer;
+					}
+					
+				}
+			}
+
+			.content {
+				width: $contentWidth;
+				min-height: 100px;
+				height: 100%;
+				float: right;
+				margin-right: $contentMarginRight;
+				left: $contentLeft;
+
+				.grommetux-form-field {
+					overflow: hidden;
+				}
+
+				.grommetux-form-field--focus {
+					border-color: $headerColor;
+				}
+
+				.starField {
+					.initialSVG {
+						display: none;
+					}
+
+					svg {
+						width: $starSVGWidth;
+						height: $starSVGHeight;
+						fill: white;
+						pointer-events: none;
+					}
+
+					.starSet {
+						display: inline-block;
+						width: 100%;
+						height: $starSetHeight;
+
+						.stars {
+
+							a {
+								width: $starWidth;
+								text-align: center;
+								margin-left: $starMarginLeft;
+								margin-top: $starMarginTop;
+							}
+
+							display: flex;
+							flex-flow: row-reverse;
+							justify-content: flex-end;
+
+
+							.star.is-selected svg, 
+							.star.is-selected ~ .star svg {
+								fill: orange;
+							}
+
+							.star:hover svg, 
+							.star:hover ~ .star svg {
+								fill: orange;
+							}
+						}
+					}
+
+					[dir="rtl"] {
+						direction: rtl;
+					}
+				}
+
+				.profilePhoto, .nameLink, .contactInformation, .address, .basic, .links, .education, .aboutMe, .highSchool, .college,
+				.language, .softwareDiv, .leadershipDiv, .interests, .careerGoals, .experience, .personal, .notifications, .privacy, .password, .deleteAccount {
+					width: 100%;
+					margin-top: $contentMargin;
+					padding-top: $contentPadding;
+
+					div {
+						text-align: left;
+						background-color: $inactiveTabColor;
+					}
+					button {
+						margin-top: $contentButtonMargin;
+						min-height: $contentButtonHeight;
+						background-color: $activeTabColor;
+						color: white;
+					}
+				}
+
+				.address {
+					
+					.city {
+						width: $addressCityWidth;
+						float: left;
+					}
+
+					.currentState {
+						width: $addressStateWidth;
+						float: left;
+					}
+
+					.currentCountry {
+						width: $addressCountryWidth;
+						float: left;
+					}
+
+					.zipCode {
+						width: $addressZipcodeWidth;
+						float: left;
+					}
+				}
+
+				.highSchool {
+					.graduationMonth, .graduationYear {
+						width: $gradWidth;
+						float: left;
+					}
+				}
+
+				.college {
+					padding: 0;
+					margin-top: $collegeMargin;
+					.graduationMonth, .graduationYear {
+						width: $gradWidth;
+						float: left;
+					}
+				}
+
+				.aboutMe {
+					padding: 0;
+					margin-top: $aboutMeMargin;
+					button {
+						margin-top: $aboutmeButtonMargin;
+						min-height: $aboutmeButtonHeight;
+						background-color: $activeTabColor;
+						background-color: $submitColor;
+						color: white;
+					}
+				}
+
+				.profilePhoto {
+					img {
+						width: $profilePhotoWidth !important;
+					}
+				}
+
+				.profilePhoto, .highSchool, .language, .careerGoals, .personal {
+					margin-top: $firstDivMargin;
+					padding: 0;
+
+					img {
+						width: 100%;
+						padding: $imgPadding;
+						background-color: $inactiveTabColor;
+					}
+
+					img:hover {
+						cursor: pointer;
+					}
+
+					input[type="file"] {
+						display: none;
+					}
+				}
+
+				.idealPosition {
+					margin: 0;
+					padding: 0;
+				}
+
+				.deleteAccount {
+					padding: 0;
+					margin-top: $deleteAccountMargin;
+				}
+
+				.basic {
+					all: none;
+				}
+
+				.notifications {
+					.grommetux-check-box__control-check  {
+                        stroke: black;
+                    }
+
+					label {
+                        * {
+                            border-color: black !important;
+                        }
+					}
+				}
+
+				.leadershipDiv, .experience {
+					.startMonth, .startYear, .endMonth, .endYear {
+						width: $gradWidth;
+						float: left;
+					}
+				}
+
+				.filler {
+					min-height: $innerFillerHeight;
+					background-color: white;
+				}
+			}
+
+			.filler {
+				width: $outerFillerWidth;
+				min-height: $outerFillerHeight;
+				float: left;
+			}
+			
+		}
+	}
+
+        .footer {
+            height: $footerHeight;
+            bottom: 0px;
+            width: 100vw;
+            position: relative;
+            float: left;
+
+            footer {
+                bottom: 0;
+                width: $footerWidth;
+                height: $footerHeight;
+                background-color: $footerBackgroundColor;
+
+                .links {
+                    width: $linksWidth;
+                    height: 100%;
+                    float: left;
+                    display: table;
+
+                    a {
+                        display: table-cell;
+                        text-align: center;
+                        vertical-align: middle;
+                        width: $footerLinkWidth;
+                        height: 100%;
+                        color: white !important;
+                        font-weight: 100;
+                        font-size: $footerFontSize;
+                    }
+                }
+
+                .filler {
+                    width: $fillerWidth;
+                    height: 100%;
+                    float: left;
+                }
+
+                .ourServices {
+                    width: $ourServicesWidth;
+                    height: 100%;
+                    float: left;
+                    display: table;
+
+                    .students, .employers {
+                        width: $ourServicesDivWidth;
+                        height: 100%;
+                        text-align: center;
+                        display: table-cell;
+                        vertical-align: middle;
+                        
+                        label {
+                            margin: 0;
+                            font-size: $ourServicesFontSize;
+                            color: $ourServicesLabelColor;
+                        }
+
+                        a {
+                            display: table-cell;
+                            text-align: center;
+                            width: $ourServicesLinkWidth;
+                            height: 100%;
+                            color: white !important;
+                            font-weight: 100;
+                            font-size: $ourServicesLinkFontSize;
+                        }
+                    }
+                }
+
+                .socialMedia {
+                    width: $socialMediaWidth;
+                    height: 100%;
+                    float: left;
+                    display: table;
+
+                    a {
+                        display: table-cell;
+                        width: $socialMediaLinkWidth;
+                        height: 100%;
+                        vertical-align: middle;
+                        text-align: center;
+                        outline: 0;
+
+                        img, svg {
+                            width: $socialMediaImgWidth;
+                            height: $socialMediaImgHeight;
+                        }
+
+                        svg {
+                            background-color: white;
+                        }
+                    }
+                }
+            }
+        }
+
+    @media screen and (max-width: $tabletWidth) {
+		.tabs {
+			.main {
+				.filler {
+					display: none;
+				}
+
+				.title {
+					label {
+						font-size: $mobileTitleFontSize;
+					}
+				}
+
+				.content {
+					margin-right: $mobileContentMargin;
+					width: $mobileContentWidth;
+					left: $mobileContentLeft;
+				}
+
+				.sidebar {
+					nav {
+						label {
+							min-width: $mobileSidebarLabelWidth;
+						}
+					}
+				}
+			}
+		}
+        .footer {
+            footer {
+                .links {
+                    width: 100% !important;
+                    height: $mobileFooterLinksHeight!important;
+                    background-color: $footerBackgroundColor;
+
+                    a {
+                        font-size: $mobileFooterLinkFontSize !important;
+                    }
+                }
+
+                .ourServices {
+                    width: $mobileOurServicesWidth !important;
+                    background-color: $footerBackgroundColor;
+
+                    .students, .employers {
+                        label {
+                            font-size: $mobileFooterLabelFontSize !important;
+                        }
+
+                        a {
+                            width: $mobileFooterLinkWidth !important;
+                            font-size: $mobileFooterLinkFontSize !important;
+                        }
+                    }
+                }
+
+                .socialMedia {
+                    width: $mobileSocialMediaWidth !important;
+                    background-color: $footerBackgroundColor;
+
+                    a {
+                        vertical-align: top !important;
+                    }
+                }
+
+                .filler {
+                    width: 0 !important;
+                }
+            }
+        }
+    }
+}

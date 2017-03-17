@@ -1,0 +1,652 @@
+$leftContainerWidth: 66%;
+$leftContainerHeight: 92vh;
+$leftContainerMinHeight: 92vh;
+$leftContainerPadding: 2%;
+$formInputMargin: 3%;
+$nameWidth: 48%;
+$firstNameMargin: 4%;
+$passwordMargin: 3%;
+$labelMargin: 5%;
+$grommetBoxHeight: 400px;
+$nameMargin: 4%;
+$grommetCheckboxWidth: 10%;
+
+$maxTabHeight: 50px;
+$headerLetterSpacing: 1.5px;
+
+$welcomeWidth: 350px;
+$welcomeHeight: 92vmax;
+$errorContainerHeight: 30px;
+$errorNotificationPadding: 5px;
+$errorNotificationFontSize: 0.8em;
+
+$rightContainerWidth: 34%;
+$rightContainerHeight: 100%;
+$rightContainerPadding: 3%;
+$logoDivHeight: 6vmax;
+$logoBackgroundSize: 80%;
+$altLogoWidth: 50%;
+
+$whatWeDoHeight: 80%;
+$whatWeDoParagraphHeight: 80%;
+$whatWeDoParagraphWidth: 70%;
+$whatWeDoParagraphPadding: 3%;
+$whatWeDoPaddingTop: 5%;
+$whatWeDoDivMargin: 5%;
+$whatWeDoDivHeight: 100%;
+$whatWeDoDivParaHeight: 25%;
+$whatWeDoParaFontSize: 0.75em;
+$whatWeDoParaLineHeight: 2em;
+$whatWeDoDivParaFontSize: 0.6em;
+$whatWeDoDivParaLineHeight: 1.5em;
+$whatWeDoHeaderMargin: 1em;
+
+$socialMediaHeight: 3em;
+$socialMediaMargin: 3% 0 0 0;
+$socialMediaDivWidth: 33.33%;
+$socialMediaDivBorder: 1px solid orangered;
+$socialMediaHoverColor: #e6e6e6;
+$buttonHoverColor: #ff6a33;
+$svgMargin: 10%;
+
+$buttonMargin: 3%;
+$buttonBorder: 2px solid white;
+$buttonBackgroundColor: orangered;
+
+$academicColor: #0AD1F5;
+$experienceColor: #11D4BA;
+$skillsColor: #E52561;
+$testingColor: #9620C4;
+
+$footerWidth: 100vw;
+$footerHeight: 8vh;
+$footerBackgroundColor: #1C2600;
+$footerLinkWidth: 25%;
+$footerFontSize: 1vw;
+$linksWidth: 40%;
+$fillerWidth: 5%;
+$ourServicesWidth: 35%;
+$ourServicesDivWidth: 50%;
+$ourServicesFontSize: 1.2vw;
+$ourServicesLinkWidth: 25%;
+$ourServicesLinkFontSize: 1vw;
+$ourServicesLabelColor: #3D4E64;
+$socialMediaWidth: 15%;
+$socialMediaLinkWidth: 25%;
+$socialMediaImgWidth: 20px;
+$socialMediaImgHeight: 20px;
+
+$smallestWidth: 361px;
+$tabletWidth: 600px;
+$smallestHeight: 301px;
+$smallerHeight: 451px;
+$mediumHeight: 601px;
+$largestHeight: 1000px;
+
+$mobileContainerHeight: 550px;
+$mobileWelcomeWidth: 280px;
+$mobileFontSize: 0.7em;
+$mobileFooterLinksHeight: 50%;
+$mobileFooterAnchorFontSize: 2.5vw;
+$mobileOurServicesWidth: 70%;
+$mobileOurServicesFontSize: 3vw;
+$mobileOurServicesLinkFontSize: 2.5vw;
+$mobileOurServicesLinkWidth: 10%;
+$mobileSocialMediaWidth: 30%;
+$mobileSmallestHeight: 300vh;
+$mobileSmallFooterHeight: 20vh;
+$mobileSmallerHeight: 250vh;
+$mobileMediumHeight: 150vh;
+$mobileMediumFooterHeight: 10vh;
+$largeScreenOurServicesMargin: 10%;
+
+
+html, body {
+    height: 100%;
+}
+
+.login {
+    margin: 0 auto;
+    height: 100vh;
+    overflow: hidden;
+
+    .container {
+        margin: 0 auto -$footerHeight;
+        min-height: 100%;
+        
+        .leftContainer {
+            padding-top: $leftContainerPadding;
+            width: $leftContainerWidth;
+            height: $leftContainerHeight !important;
+            min-height: $leftContainerMinHeight;
+            background: url("http://sehrawat.student.uscitp.com/wyndenstark/loginBackgroundDarker.jpg") no-repeat center center;
+            background-size: cover;
+            float: left;
+
+            .altLogo {
+                width: $altLogoWidth;
+                height: $logoDivHeight;
+                background-image: url("http://sehrawat.student.uscitp.com/wyndenstark/nebulaLogoWhite.png") no-repeat center center;
+                background-size: $logoBackgroundSize;
+                margin: 0 auto;
+                display: none;
+            }
+
+            .welcome {
+                display: block;
+                margin: 0 auto;
+                align-self: center;
+                width: $welcomeWidth;
+
+                ul {
+                    max-height: $maxTabHeight;
+                }
+
+                h3 {
+                    color: white;
+                    letter-spacing: $headerLetterSpacing;
+                }
+
+                label {
+                    color: white;
+                }
+                
+                ul {
+                    border-color: white;
+                    label {
+                        text-transform: uppercase;
+                        color: white;
+                    }
+                }
+
+                .grommetux-tab--active .grommetux-tab__label, 
+                .grommetux-tab--active .grommetux-tab__link:hover .grommetux-tab__label {
+                    border-color: $academicColor;
+                }
+
+                .grommetux-tabs {
+                    .grommet a:not(.grommetux-anchor):not(.grommetux-button) {
+                        color: transparent;
+                    }
+
+                    .grommet a:hover:not(.grommetux-anchor):not(.grommetux-button) {
+                        color: transparent;
+                    }
+                }
+
+                .grommetux-box {
+                    height: $grommetBoxHeight !important;
+                }
+
+                .errorContainer {
+                    height: $errorContainerHeight;
+
+                    .errorNotification {
+                        display: none;
+                        .grommetux-box {
+                            padding: 0;
+                            padding-left: $errorNotificationPadding;
+
+                            span {
+                                font-size: $errorNotificationFontSize;
+                            }
+
+                            .grommetux-notification__status {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+
+                form {
+                    width: 100%;
+
+                    ::-webkit-input-placeholder {
+                        color: white;
+                    }
+
+                    :-moz-placeholder {
+                        color: white;  
+                    }
+
+                    ::-moz-placeholder {
+                        color: white;  
+                    }
+
+                    :-ms-input-placeholder {  
+                        color: white;  
+                    }
+
+                    input {
+                        color: white;
+                        border-color: white;
+                        width: 100%;
+                        margin-top: $formInputMargin;
+                    }
+
+                    .grommetux-form-field {
+                        border-color: white;
+                        transition: none;
+                    }
+
+                    .grommetux-form-field--focus {
+                        border-color: $academicColor;
+                    }
+
+                    .firstName, .lastName {
+                        width: $nameWidth;
+                        float: left;
+                        margin-top: 0;
+                        margin-bottom: $nameMargin;
+                    }
+
+                    .firstName {
+                        margin-right: $firstNameMargin;
+                    }
+
+                    .password {
+                        margin-bottom: $passwordMargin;
+                        margin-top: $nameMargin;
+                    }
+
+                    .grommetux-check-box {
+                        margin: 0;
+                    }
+
+                    .grommetux-check-box__input {
+                        width: $grommetCheckboxWidth;
+                    }
+
+                    .grommetux-check-box__control-check {
+                        stroke: white;
+                    }
+
+                    #agreement {
+                        color: white;
+                        display: inline;
+                    }
+
+                    a {
+                        color: darkgray;
+                        z-index: 2;
+                    }
+
+                    label {
+                        margin-top: $labelMargin;
+
+                        * {
+                            color: white;
+                            border-color: white !important;
+                        }
+                    }
+
+                    label:hover {
+                        * {
+                            all: none;
+                        }
+                    }
+
+                    .socialMedia {
+                        width: 100%;
+                        height: $socialMediaHeight;
+                        margin: $socialMediaMargin;
+                        background-color: white;
+
+                        div {
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            width: $socialMediaDivWidth;
+                            height: 100%;
+                            float: left;
+                            border: $socialMediaDivBorder;
+                            cursor: pointer;
+
+                            svg {
+                                margin: 0 auto;
+                                fill: lightgray;
+                                stroke: lightgray;
+                            }
+                        }
+                        
+                        div:hover {
+                            background-color: $socialMediaHoverColor;
+                        }
+                    }
+
+                    button {
+                        width: 100%;
+                        margin-top: $buttonMargin;
+                        border: $buttonBorder;
+                        color: white;
+                        background-color: $buttonBackgroundColor;
+                        opacity: 1;
+                    }
+                    button:hover {
+                        background-color: $buttonHoverColor;
+                    }
+                }
+
+                form * {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .rightContainer {
+            width: $rightContainerWidth;
+            height: $rightContainerHeight;
+            padding-top: $rightContainerPadding;
+            right: 0;
+            float: right;
+
+            .logoDiv {
+                width: 100%;
+                height: $logoDivHeight;
+                background: url("http://sehrawat.student.uscitp.com/wyndenstark/nebulaLogoNavy.png") no-repeat center center;
+                background-size: $logoBackgroundSize;
+            }
+
+            .whatWeDo {
+                width: 100%;
+                height: $whatWeDoHeight;
+                text-align: center;
+                padding-top: $whatWeDoPaddingTop;
+                
+                .academic {
+                    color: $academicColor;
+                }
+
+                .experience {
+                    color: $experienceColor;
+                }
+
+                .skills {
+                    color: $skillsColor;
+                }
+
+                .testing {
+                    color: $testingColor;
+                }
+
+                div {
+                    p {
+                        width: $whatWeDoParagraphHeight;
+                        margin: 0 auto;
+                        padding-left: $whatWeDoParagraphPadding;
+                        text-align: left;
+                        color: black;
+                        border-left: 1px solid gray;
+                        font-size: $whatWeDoParaFontSize;
+                        line-height: $whatWeDoParaLineHeight;
+                    }
+
+                    div {
+                        margin-top: $whatWeDoDivMargin;
+                        height: $whatWeDoDivHeight;
+                        
+                        h5 {
+                            margin: 0;
+                            padding: 0;
+                            margin-top: $whatWeDoHeaderMargin;
+                        }
+
+                        p {
+                            height: $whatWeDoDivParaHeight;
+                            border: 0;
+                            margin: 0 auto;
+                            font-size: $whatWeDoDivParaFontSize;
+                            line-height: $whatWeDoDivParaLineHeight;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer {
+            height: $footerHeight;
+            bottom: 0px;
+            width: 100vw;
+            position: relative;
+            float: left;
+
+            footer {
+                bottom: 0;
+                width: $footerWidth;
+                height: $footerHeight;
+                background-color: $footerBackgroundColor;
+
+                .links {
+                    width: $linksWidth;
+                    height: 100%;
+                    float: left;
+                    display: table;
+
+                    a {
+                        display: table-cell;
+                        text-align: center;
+                        vertical-align: middle;
+                        width: $footerLinkWidth;
+                        height: 100%;
+                        color: white !important;
+                        font-weight: 100;
+                        font-size: $footerFontSize;
+                    }
+                }
+
+                .filler {
+                    width: $fillerWidth;
+                    height: 100%;
+                    float: left;
+                }
+
+                .ourServices {
+                    width: $ourServicesWidth;
+                    height: 100%;
+                    float: left;
+                    display: table;
+
+                    .students, .employers {
+                        width: $ourServicesDivWidth;
+                        height: 100%;
+                        text-align: center;
+                        display: table-cell;
+                        vertical-align: middle;
+                        
+                        label {
+                            margin: 0;
+                            font-size: $ourServicesFontSize;
+                            color: $ourServicesLabelColor;
+                        }
+
+                        a {
+                            display: table-cell;
+                            text-align: center;
+                            width: $ourServicesLinkWidth;
+                            height: 100%;
+                            color: white !important;
+                            font-weight: 100;
+                            font-size: $ourServicesLinkFontSize;
+                        }
+                    }
+                }
+
+                .socialMedia {
+                    width: $socialMediaWidth;
+                    height: 100%;
+                    float: left;
+                    display: table;
+
+                    a {
+                        display: table-cell;
+                        width: $socialMediaLinkWidth;
+                        height: 100%;
+                        vertical-align: middle;
+                        text-align: center;
+                        outline: 0;
+
+                        img, svg {
+                            width: $socialMediaImgWidth;
+                            height: $socialMediaImgHeight;
+                            margin-top: $svgMargin;
+                        }
+
+                        svg {
+                            margin: 0 auto;
+                            fill: #1C2600;
+                            stroke: #1C2600;
+                            stroke-width: 50;
+                            background-color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $smallestWidth) {
+        overflow-y: scroll;
+        .container {
+            .leftContainer {
+                min-height: $mobileContainerHeight;
+
+                .welcome {
+                    width: $mobileWelcomeWidth;
+
+                    form {
+                        label {
+                            font-size: $mobileFontSize;
+                        }
+                    }
+                }
+            }
+            min-height: $mobileContainerHeight;
+        }
+    }
+
+    @media screen and (max-width: $tabletWidth) {
+        overflow-y: scroll;
+        .container {
+            .rightContainer {
+                display: none;
+            }
+
+            .leftContainer {
+                width: 100%;
+
+                .altLogo {
+                    display: block;
+                }
+            }
+        }
+
+        .footer {
+            footer {
+                .links {
+                    width: 100% !important;
+                    height: $mobileFooterLinksHeight !important;
+                    background-color: $footerBackgroundColor;
+
+                    a {
+                        font-size: $mobileFooterAnchorFontSize !important;
+                    }
+                }
+
+                .ourServices {
+                    width: $mobileOurServicesWidth !important;
+                    background-color: $footerBackgroundColor;
+
+                    .students, .employers {
+                        label {
+                            font-size: $mobileOurServicesFontSize !important;
+                        }
+
+                        a {
+                            width: $mobileOurServicesLinkWidth !important;
+                            font-size: $mobileOurServicesLinkFontSize !important;
+                        }
+                    }
+                }
+
+                .socialMedia {
+                    width: $mobileSocialMediaWidth !important;
+                    background-color: $footerBackgroundColor;
+
+                    a {
+                        vertical-align: top !important;
+                    }
+                }
+
+                .filler {
+                    width: 0 !important;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-height: $smallestHeight) {
+        overflow-y: scroll;
+        
+        .container {
+            .leftContainer {
+                height: $mobileSmallestHeight !important;
+            }
+
+            .footer {
+                footer {
+                    height: $mobileSmallFooterHeight !important;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-height: $smallerHeight) and (min-height: $smallestHeight) {
+        overflow-y: scroll;
+        
+        .container {
+            .leftContainer {
+                height: $mobileSmallerHeight !important;
+            }
+
+            .footer {
+                footer {
+                    height: $mobileMediumFooterHeight !important;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-height: $smallerHeight) and (max-height: $mediumHeight) {
+        overflow-y: scroll;
+        
+        .container {
+            .leftContainer {
+                height: $mobileMediumHeight !important;
+            }
+
+            .rightContainer {
+                height: 90vh !important;
+            }
+
+            .footer {
+                footer {
+                    height: $mobileMediumFooterHeight !important;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-height: $largestHeight) {
+        .container {
+            .footer {
+                footer {
+                    .ourServices {
+                        .students, .employers {
+                            margin-top: $largeScreenOurServicesMargin;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+[
+	{
+		"name": "",
+		"key": "-1"
+	},
+	{
+		"name": "High School Degree",
+		"key": "HS"
+	},
+	{
+		"name": "Associate's Degree",
+		"key": "A"
+	},
+	{
+		"name": "Bachelor's Degree",
+		"key": "B"
+	},
+	{
+		"name": "Master's Degree",
+		"key": "M"
+	},
+	{
+		"name": "Postgraduate",
+		"key": "P"
+	}
+]
