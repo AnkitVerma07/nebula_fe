@@ -70,7 +70,7 @@ var CityInternships = React.createClass({
                                 Nice, so you went to {originalName}! 
                                 Worked for The Crimson?
                             </Paragraph>
-                            <Checkbox />
+
                         </div>)
     }
     return (

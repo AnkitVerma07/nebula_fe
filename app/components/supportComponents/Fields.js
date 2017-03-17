@@ -115,7 +115,6 @@ var Fields = {
             return (
                 <div className={this.props.fieldID}>
                     <FormField label={this.props.fieldName} >
-                        <Checkbox label={this.props.label} id={this.props.fieldID} onChange={this.props.changeFunc} />
                     </FormField>
                 </div>
             )

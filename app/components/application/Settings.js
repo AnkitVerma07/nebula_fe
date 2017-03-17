@@ -149,10 +149,7 @@ var ApplicationSettings = React.createClass({
                     </div>
                     <div className="notifications" ref="notifications">
                         <FormField>
-                            <Checkbox fieldName="News" label="News about public profile views" fieldID="news" changeFunc={this.valueChange} />
-                            <Checkbox fieldName="System" label="System updates and announcements" fieldID="system" changeFunc={this.valueChange} />
-                            <Checkbox fieldName="Recommendations" label="Recommendations based on my account" fieldID="recommendations" changeFunc={this.valueChange} />
-                            <Checkbox fieldName="Never" label="Never" fieldID="never" changeFunc={this.valueChange} />
+
                         </FormField>
                         <Button id="notificationsButton" fill={true} plain={true} onClick={privacyScroll}>NEXT</Button>
                     </div>

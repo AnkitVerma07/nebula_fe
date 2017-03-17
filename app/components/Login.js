@@ -243,7 +243,7 @@ var Login = React.createClass({
                                             <InputFieldLogin fieldID="lastName" fieldName="Last Name" changeFunc={this.valueChange} />
                                             <InputFieldLogin fieldID="email" fieldName="Email Address" changeFunc={this.valueChange} />
                                             <InputFieldLogin fieldID="password" fieldName="Password" changeFunc={this.valueChange} />
-                                            <Checkbox onChange={this.agreedTerms} />
+
                                             <Paragraph id="agreement">
                                                 I agree to the <a target="_blank" href="#/termsofuse">terms of use</a> and <a href="#/privacypolicy" target="_blank">privacy policy</a>
                                             </Paragraph>
