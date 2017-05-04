@@ -27,6 +27,8 @@ require('../styles/login.scss');
 /* Auth includes */
 require('auth0-js');
 
+var $ = require('jquery');
+
 var NebulaFooter = require('../components/supportComponents/Footer.js');
 
 var validateName = require('../components/supportComponents/Validation.js').validateName;
@@ -41,28 +43,28 @@ var InputFieldLogin = require('../components/supportComponents/Fields.js').Input
 var WhatWeDoSection = require('../components/supportComponents/Fields.js').WhatWeDoSection;
 var SocialMediaSet = require('../components/supportComponents/Fields.js').SocialMediaSet;
 
-var auth0 = new Auth0({
-    domain:       process.env.AUTH0_DOMAIN,
-    clientID:     process.env.AUTH0_CLIENT_ID,
-    callbackURL: authCallbackUrl,
-    responseType: 'token',
-    callbackOnLocationHash: true,
-});
+// var auth0 = new Auth0({
+//     domain:       process.env.AUTH0_DOMAIN,
+//     clientID:     process.env.AUTH0_CLIENT_ID,
+//     callbackURL: authCallbackUrl,
+//     responseType: 'token',
+//     callbackOnLocationHash: true,
+// });
 
-$(function() {
-    var result = auth0.parseHash(window.location.hash);
-    if (result && result.id_token) {
-    auth0.getProfile(result.id_token, function (err, profile) {
-        localStorage.setItem('id_token', result.id_token);
-        localStorage.setItem('profile', JSON.stringify(profile));
-        ReactRouter.browserHistory.push(reactRouterRedirect);
-        window.location.reload();
-    });
-    } 
-    else if (result && result.error) {
-        console.log(result.error);
-    }
-});
+// $(function() {
+//     var result = auth0.parseHash(window.location.hash);
+//     if (result && result.id_token) {
+//     auth0.getProfile(result.id_token, function (err, profile) {
+//         localStorage.setItem('id_token', result.id_token);
+//         localStorage.setItem('profile', JSON.stringify(profile));
+//         ReactRouter.browserHistory.push(reactRouterRedirect);
+//         window.location.reload();
+//     });
+//     }
+//     else if (result && result.error) {
+//         console.log(result.error);
+//     }
+// });
 
 
 var Login = React.createClass({
@@ -112,11 +114,42 @@ var Login = React.createClass({
         var connectionType = "";
 
         if(type == "regular") {
-            auth0.login({ 
-                connection: 'Nebula-DB',
-                username: this.state.email,
-                password: this.state.password
-            });
+            // auth0.login({
+            //     connection: 'Nebula-DB',
+            //     username: this.state.email,
+            //     password: this.state.password
+            // });
+          $.ajax({
+            type: 'GET',
+            dataType: "json",
+            crossDomain: true,
+            url: 'http://localhost:9090/nebulaben/benapi/userInfo/validateLogin/' + this.state.email + '/' + this.state.password,
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            success: (response) => {
+            localStorage.setItem('user_id', response.id);
+            localStorage.setItem('userData', response);
+            ReactRouter.browserHistory.push(reactRouterRedirect);
+            window.location.reload();
+            },
+            error : (xhr, status) => {
+              alert('Sorry, there was a problem!');
+            },
+          });
+
+          // fetch('http://localhost:9090/nebulaben/benapi/userInfo/validateLogin/' + this.state.email + '/' + this.state.password, {
+          //   method: 'get'
+          // }).then( (response) => {
+          //   return response.json();
+          // }).then( (res) => {
+          //   console.log('1', res);
+          //   console.log('3', res.id);
+          // }).catch(function(err) {
+          //   // Error :(
+          // });
+
         }
         else {
             switch(type) {
@@ -152,11 +185,34 @@ var Login = React.createClass({
         var connectionType = "";
 
         if(type == "regular") {
-            auth0.signup({ 
-                connection: 'Nebula-DB',
-                username: this.state.email,
-                password: this.state.password
-            });
+            // auth0.signup({
+            //     connection: 'Nebula-DB',
+            //     username: this.state.email,
+            //     password: this.state.password
+            // });
+          var dataObj = {
+              "firstName": this.state.firstName,
+            "lastName": this.state.lastName,
+                "email": this.state.email,
+                "hashed_password" : this.state.password
+          }
+          var data = JSON.stringify(dataObj);
+          $.ajax({
+            type: 'POST',
+            dataType: "application/json",
+            crossDomain: true,
+            url: 'http://localhost:9090/nebulaben/benapi/userInfo/insertUser',
+            data: data,
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          }).done( (response) => {
+            localStorage.setItem('user_id', response.id);
+            localStorage.setItem('userData', response);
+            ReactRouter.browserHistory.push(reactRouterRedirect);
+            window.location.reload();
+          });
         }
         else {
             switch(type) {
@@ -226,6 +282,25 @@ var Login = React.createClass({
                             </div>
                             <div className="welcome">
                                 <Tabs>
+                                    <Tab title="Log In" className="loginTab">
+                                        <Heading tag="h3" strong={true} margin="none">
+                                            Welcome to Nebula.
+                                        </Heading>
+                                        <Label margin="small">
+                                            Log in to get started.
+                                        </Label>
+                                        <div className="errorContainer">
+                                            <div className="errorNotification" id="errorLogin">
+                                                <Notification status="critical" message="Error shows up here" size="small"/>
+                                            </div>
+                                        </div>
+                                        <Form>
+                                            <InputFieldLogin fieldID="email" fieldName="Email Address" changeFunc={this.valueChange} />
+                                            <InputFieldLogin fieldID="password" fieldName="Password" changeFunc={this.valueChange} />
+                                            <SocialMediaSet authFunc={this.login} />
+                                            <Button label="LOGIN" fill={true} id="regular" onClick={this.login} />
+                                        </Form>
+                                    </Tab>
                                     <Tab title="Sign Up" className="signUpTab">
                                         <Heading tag="h3" strong={true} margin="none">
                                             Welcome to Nebula.
@@ -249,25 +324,6 @@ var Login = React.createClass({
                                             </Paragraph>
                                             <SocialMediaSet authFunc={this.signup} />
                                             <Button className="loginButton" label="GET STARTED" fill={true} id="regular" onClick={this.signup}/>
-                                        </Form>
-                                    </Tab>
-                                    <Tab title="Log In" className="loginTab">
-                                        <Heading tag="h3" strong={true} margin="none">
-                                            Welcome to Nebula.
-                                        </Heading>
-                                        <Label margin="small">
-                                            Log in to get started.
-                                        </Label>
-                                        <div className="errorContainer">
-                                            <div className="errorNotification" id="errorLogin">
-                                                <Notification status="critical" message="Error shows up here" size="small"/>
-                                            </div>
-                                        </div>
-                                        <Form>
-                                            <InputFieldLogin fieldID="email" fieldName="Email Address" changeFunc={this.valueChange} />
-                                            <InputFieldLogin fieldID="password" fieldName="Password" changeFunc={this.valueChange} />
-                                            <SocialMediaSet authFunc={this.login} />
-                                            <Button label="LOGIN" fill={true} id="regular" onClick={this.login} />
                                         </Form>
                                     </Tab>
                                 </Tabs>
