@@ -31,8 +31,8 @@ var Notification = require('grommet/components/Notification');
 var Timestamp = require('grommet/components/Timestamp');
 var NumberInput = require('grommet/components/NumberInput');
 var Quote = require('grommet/components/Quote');
-//var Sunburst = require('grommet/components/Sunburst');
-//var Worldmap = require('grommet/components/Worldmap');
+var Sunburst = require('grommet/components/Sunburst');
+var Worldmap = require('grommet/components/Worldmap');
 
 /* ZingChart */
 require('zingchart/client/zingchart.min.js');
@@ -371,7 +371,7 @@ var CustomizeSunburst = React.createClass({
                 <Sunburst data={[
                 {
                     "label": "root-1",
-                    "value": 50,
+                    "value": 70,
                     "colorIndex": "neutral-1",
                     "children": [
                     {
@@ -385,7 +385,7 @@ var CustomizeSunburst = React.createClass({
                         ]
                     },
                     {"label": "sub-2", "value": 20, "colorIndex": "neutral-1"},
-                    {"label": "sub-3", "value": 10, "colorIndex": "neutral-1"}
+                    {"label": "sub-3", "value": 30, "colorIndex": "neutral-1"}
                     ]
                 },
                 {

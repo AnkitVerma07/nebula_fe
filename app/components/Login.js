@@ -13,7 +13,7 @@ var Tab = require('grommet/components/Tab');
 var Form = require('grommet/components/Form');
 var FormField = require('grommet/components/FormField');
 var Mail = require('grommet/components/icons/base/Mail');
-//var Checkbox = require('grommet/components/Checkbox');
+var Checkbox = require('grommet/components/Checkbox');
 var SocialFacebook = require('grommet/components/icons/base/SocialFacebook');
 var SocialGoogle = require('grommet/components/icons/base/SocialGoogle');
 var SocialWindows = require('grommet/components/icons/base/PlatformWindows');
@@ -26,8 +26,6 @@ require('../styles/login.scss');
 
 /* Auth includes */
 require('auth0-js');
-
-var $ = require('jquery');
 
 var NebulaFooter = require('../components/supportComponents/Footer.js');
 
@@ -43,28 +41,28 @@ var InputFieldLogin = require('../components/supportComponents/Fields.js').Input
 var WhatWeDoSection = require('../components/supportComponents/Fields.js').WhatWeDoSection;
 var SocialMediaSet = require('../components/supportComponents/Fields.js').SocialMediaSet;
 
-// var auth0 = new Auth0({
-//     domain:       process.env.AUTH0_DOMAIN,
-//     clientID:     process.env.AUTH0_CLIENT_ID,
-//     callbackURL: authCallbackUrl,
-//     responseType: 'token',
-//     callbackOnLocationHash: true,
-// });
+var auth0 = new Auth0({
+    domain:       process.env.AUTH0_DOMAIN,
+    clientID:     process.env.AUTH0_CLIENT_ID,
+    callbackURL: authCallbackUrl,
+    responseType: 'token',
+    callbackOnLocationHash: true,
+});
 
-// $(function() {
-//     var result = auth0.parseHash(window.location.hash);
-//     if (result && result.id_token) {
-//     auth0.getProfile(result.id_token, function (err, profile) {
-//         localStorage.setItem('id_token', result.id_token);
-//         localStorage.setItem('profile', JSON.stringify(profile));
-//         ReactRouter.browserHistory.push(reactRouterRedirect);
-//         window.location.reload();
-//     });
-//     }
-//     else if (result && result.error) {
-//         console.log(result.error);
-//     }
-// });
+$(function() {
+    var result = auth0.parseHash(window.location.hash);
+    if (result && result.id_token) {
+        auth0.getProfile(result.id_token, function (err, profile) {
+            localStorage.setItem('id_token', result.id_token);
+            localStorage.setItem('profile', JSON.stringify(profile));
+            ReactRouter.browserHistory.push(reactRouterRedirect);
+            window.location.reload();
+        });
+    }
+    else if (result && result.error) {
+        console.log(result.error);
+    }
+});
 
 
 var Login = React.createClass({
@@ -80,29 +78,29 @@ var Login = React.createClass({
     validate: function(key, value) {
         switch(key) {
             case "firstName":
-            return validateName(key, value);
+                return validateName(key, value);
 
             case "lastName":
-            return validateName(key, value);
+                return validateName(key, value);
 
             case "email":
-            return validateEmail(key, value);
+                return validateEmail(key, value);
 
             case "password":
-            return validatePassword(key, value);
+                return validatePassword(key, value);
         }
     },
-	valueChange: function(e) {
-		var key = e.target.id;
-		var val = e.target.value;
-		var obj = {};
-		obj[key] = val;
+    valueChange: function(e) {
+        var key = e.target.id;
+        var val = e.target.value;
+        var obj = {};
+        obj[key] = val;
 
         var validationResult = this.validate(key, val);
         if(validationResult) {
-		    this.setState(obj);
+            this.setState(obj);
         }
-	},
+    },
     login: function(e) {
         var type;
         if(typeof e.target != "undefined") {
@@ -119,54 +117,43 @@ var Login = React.createClass({
             //     username: this.state.email,
             //     password: this.state.password
             // });
-          $.ajax({
-            type: 'GET',
-            dataType: "json",
-            crossDomain: true,
-            url: 'http://localhost:9090/nebulaben/benapi/userInfo/validateLogin/' + this.state.email + '/' + this.state.password,
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            success: (response) => {
-            localStorage.setItem('user_id', response.id);
-            localStorage.setItem('userData', response);
-            ReactRouter.browserHistory.push(reactRouterRedirect);
-            window.location.reload();
-            },
-            error : (xhr, status) => {
-              alert('Sorry, there was a problem!');
-            },
-          });
 
-          // fetch('http://localhost:9090/nebulaben/benapi/userInfo/validateLogin/' + this.state.email + '/' + this.state.password, {
-          //   method: 'get'
-          // }).then( (response) => {
-          //   return response.json();
-          // }).then( (res) => {
-          //   console.log('1', res);
-          //   console.log('3', res.id);
-          // }).catch(function(err) {
-          //   // Error :(
-          // });
-
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                crossDomain: true,
+                url: 'http://localhost:9090/nebulaben/benapi/userInfo/validateLogin/' + this.state.email + '/' + this.state.password,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                success: (response) => {
+                    localStorage.setItem('user_id', response.id);
+                    localStorage.setItem('userData', response);
+                    ReactRouter.browserHistory.push(reactRouterRedirect);
+                    window.location.reload();
+                },
+                error : (xhr, status) => {
+                    alert('Sorry, there was a problem!');
+                },
+            });
         }
         else {
             switch(type) {
                 case "facebook":
-                connectionType = "facebook";
-                break;
+                    connectionType = "facebook";
+                    break;
 
                 case "google":
-                connectionType = "google-oauth2";
-                break;
+                    connectionType = "google-oauth2";
+                    break;
 
                 case "twitter":
-                connectionType = "twitter";
-                break;
+                    connectionType = "twitter";
+                    break;
             }
 
-            auth0.login({ 
+            auth0.login({
                 connection: connectionType,
             });
         }
@@ -185,51 +172,28 @@ var Login = React.createClass({
         var connectionType = "";
 
         if(type == "regular") {
-            // auth0.signup({
-            //     connection: 'Nebula-DB',
-            //     username: this.state.email,
-            //     password: this.state.password
-            // });
-          var dataObj = {
-              "firstName": this.state.firstName,
-            "lastName": this.state.lastName,
-                "email": this.state.email,
-                "hashed_password" : this.state.password
-          }
-          var data = JSON.stringify(dataObj);
-          $.ajax({
-            type: 'POST',
-            dataType: "application/json",
-            crossDomain: true,
-            url: 'http://localhost:9090/nebulaben/benapi/userInfo/insertUser',
-            data: data,
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          }).done( (response) => {
-            localStorage.setItem('user_id', response.id);
-            localStorage.setItem('userData', response);
-            ReactRouter.browserHistory.push(reactRouterRedirect);
-            window.location.reload();
-          });
+            auth0.signup({
+                connection: 'Nebula-DB',
+                username: this.state.email,
+                password: this.state.password
+            });
         }
         else {
             switch(type) {
                 case "facebook":
-                connectionType = "facebook";
-                break;
+                    connectionType = "facebook";
+                    break;
 
                 case "google":
-                connectionType = "google-oauth2";
-                break;
+                    connectionType = "google-oauth2";
+                    break;
 
                 case "twitter":
-                connectionType = "twitter";
-                break;
+                    connectionType = "twitter";
+                    break;
             }
 
-            auth0.login({ 
+            auth0.login({
                 connection: connectionType,
             });
         }
@@ -318,7 +282,7 @@ var Login = React.createClass({
                                             <InputFieldLogin fieldID="lastName" fieldName="Last Name" changeFunc={this.valueChange} />
                                             <InputFieldLogin fieldID="email" fieldName="Email Address" changeFunc={this.valueChange} />
                                             <InputFieldLogin fieldID="password" fieldName="Password" changeFunc={this.valueChange} />
-
+                                            <Checkbox onChange={this.agreedTerms} />
                                             <Paragraph id="agreement">
                                                 I agree to the <a target="_blank" href="#/termsofuse">terms of use</a> and <a href="#/privacypolicy" target="_blank">privacy policy</a>
                                             </Paragraph>
@@ -326,16 +290,17 @@ var Login = React.createClass({
                                             <Button className="loginButton" label="GET STARTED" fill={true} id="regular" onClick={this.signup}/>
                                         </Form>
                                     </Tab>
+
                                 </Tabs>
                             </div>
                         </div>
                         <div className="rightContainer">
                             <div className="logoDiv">
-                                
+
                             </div>
                             <div className="whatWeDo">
                                 <WhatWeDoSection tag="h4" headingText="What we do" class="" paraText="Seeking to resolve the paradoxical twin-crises of mass graduate under-employment and mass graduate employer un-fulfillment"/>
-                                <div>        
+                                <div>
                                     <WhatWeDoSection tag="h5" headingText="Academic" class="academic" paraText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore"/>
                                     <WhatWeDoSection tag="h5" headingText="Experience" class="experience" paraText="Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in"/>
                                     <WhatWeDoSection tag="h5" headingText="Skills" class="skills" paraText="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa"/>
