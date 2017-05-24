@@ -41,28 +41,28 @@ var reactRouterRedirect = '/#/dashboard';
 var WhatWeDoSection = require('../components/supportComponents/Fields.js').WhatWeDoSection;
 var SocialMediaSet = require('../components/supportComponents/Fields.js').SocialMediaSet;
 
-var auth0 = new Auth0({
-    domain:       process.env.AUTH0_DOMAIN,
-    clientID:     process.env.AUTH0_CLIENT_ID,
-    callbackURL: authCallbackUrl,
-    responseType: 'token',
-    callbackOnLocationHash: true,
-});
-
-$(function() {
-    var result = auth0.parseHash(window.location.hash);
-    if (result && result.id_token) {
-        auth0.getProfile(result.id_token, function (err, profile) {
-            localStorage.setItem('id_token', result.id_token);
-            localStorage.setItem('profile', JSON.stringify(profile));
-            ReactRouter.browserHistory.push(reactRouterRedirect);
-            window.location.reload();
-        });
-    }
-    else if (result && result.error) {
-        console.log(result.error);
-    }
-});
+// var auth0 = new Auth0({
+//     domain:       process.env.AUTH0_DOMAIN,
+//     clientID:     process.env.AUTH0_CLIENT_ID,
+//     callbackURL: authCallbackUrl,
+//     responseType: 'token',
+//     callbackOnLocationHash: true,
+// });
+//
+// $(function() {
+//     var result = auth0.parseHash(window.location.hash);
+//     if (result && result.id_token) {
+//         auth0.getProfile(result.id_token, function (err, profile) {
+//             localStorage.setItem('id_token', result.id_token);
+//             localStorage.setItem('profile', JSON.stringify(profile));
+//             ReactRouter.browserHistory.push(reactRouterRedirect);
+//             window.location.reload();
+//         });
+//     }
+//     else if (result && result.error) {
+//         console.log(result.error);
+//     }
+// });
 
 
 var Login = React.createClass({
@@ -117,7 +117,6 @@ var Login = React.createClass({
             //     username: this.state.email,
             //     password: this.state.password
             // });
-<<<<<<< HEAD
 
           //this.state.email
           $.ajax({
@@ -150,28 +149,6 @@ var Login = React.createClass({
           // }).catch(function(err) {
           //   // Error :(
           // });
-=======
->>>>>>> 8fda4cd4a7b7b06a4aa33c0d9549bdf1425472e5
-
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                crossDomain: true,
-                url: 'http://localhost:9090/nebulaben/benapi/userInfo/validateLogin/' + this.state.email + '/' + this.state.password,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                success: (response) => {
-                    localStorage.setItem('user_id', response.id);
-                    localStorage.setItem('userData', response);
-                    ReactRouter.browserHistory.push(reactRouterRedirect);
-                    window.location.reload();
-                },
-                error : (xhr, status) => {
-                    alert('Sorry, there was a problem!');
-                },
-            });
         }
         else {
             switch(type) {
@@ -188,9 +165,7 @@ var Login = React.createClass({
                     break;
             }
 
-            auth0.login({
-                connection: connectionType,
-            });
+
         }
 
         localStorage.setItem('signup', false);
@@ -207,7 +182,6 @@ var Login = React.createClass({
         var connectionType = "";
 
         if(type == "regular") {
-<<<<<<< HEAD
             // auth0.signup({
             //     connection: 'Nebula-DB',
             //     username: this.state.email,
@@ -218,7 +192,7 @@ var Login = React.createClass({
               firstName: this.refs.signup_firstname.value.trim(),
             lastName: this.refs.signup_lastname.value.trim(),
                 email: this.refs.signup_email.value.trim(),
-                hashed_password : this.refs.signup_email.value.trim()
+                hashed_password : this.refs.password.value.trim()
           }
           var data = JSON.stringify(dataObj);
           console.log(data);
@@ -242,13 +216,6 @@ var Login = React.createClass({
               alert('Sorry, there was a problem!');
             },
           });
-=======
-            auth0.signup({
-                connection: 'Nebula-DB',
-                username: this.state.email,
-                password: this.state.password
-            });
->>>>>>> 8fda4cd4a7b7b06a4aa33c0d9549bdf1425472e5
         }
         else {
             switch(type) {
@@ -264,10 +231,6 @@ var Login = React.createClass({
                     connectionType = "twitter";
                     break;
             }
-
-            auth0.login({
-                connection: connectionType,
-            });
         }
 
         localStorage.setItem('signup', true);
@@ -355,7 +318,6 @@ var Login = React.createClass({
                                             </div>
                                         </div>
                                         <Form>
-<<<<<<< HEAD
                                             <FormField className='firstname'>
                                                 <input type="text"  placeholder='Frst Name' id='firstname' ref='signup_firstname'  />
                                             </FormField>
@@ -368,15 +330,7 @@ var Login = React.createClass({
                                             <FormField className='password'>
                                                 <input type="text"  placeholder='Password' id='password' ref='signup_password'  />
                                             </FormField>
-
-
-=======
-                                            <InputFieldLogin fieldID="firstName" fieldName="First Name" changeFunc={this.valueChange} />
-                                            <InputFieldLogin fieldID="lastName" fieldName="Last Name" changeFunc={this.valueChange} />
-                                            <InputFieldLogin fieldID="email" fieldName="Email Address" changeFunc={this.valueChange} />
-                                            <InputFieldLogin fieldID="password" fieldName="Password" changeFunc={this.valueChange} />
                                             <Checkbox onChange={this.agreedTerms} />
->>>>>>> 8fda4cd4a7b7b06a4aa33c0d9549bdf1425472e5
                                             <Paragraph id="agreement">
                                                 I agree to the <a target="_blank" href="#/termsofuse">terms of use</a> and <a href="#/privacypolicy" target="_blank">privacy policy</a>
                                             </Paragraph>

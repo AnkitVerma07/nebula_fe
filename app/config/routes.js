@@ -24,7 +24,7 @@ var LoginContainer = require('../containers/LoginContainer');
 var GraphContainer = require('../containers/GraphContainer');
 var CityInternshipsContainer = require('../containers/CityInternshipsContainer');
 var ResumeContainer = require('../containers/ResumeContainer');
-
+var AssestmentContainer = require('../containers/AssestmentContainer');
 /* Ajax URL includes */
 var statesUrl = "http://ben.nebula.careers:8080/ben/nebula_fe/data/states.json";
 var universityUrl = "http://ben.nebula.careers:8080/ben/nebula_fe/data/universities.json";
@@ -41,6 +41,7 @@ var routes = (
 			universityUrl={universityUrl} 
 			component={ApplicationContainer}
 		/>
+		<Route path="assestment" header="Assestment Test" component={AssestmentContainer} />
 		<Route path="aboutus" header="About Us" component={AboutUsContainer} />
 		<Route path="contactus" header="Contact Us" component={ContactUsContainer} />
 		<Route path="privacypolicy" header="Privacy Policy" component={PrivacyPolicyContainer} />

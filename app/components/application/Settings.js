@@ -88,7 +88,6 @@ var ApplicationSettings = React.createClass({
 	getInitialState: function() {
 		return {}
 	},
-<<<<<<< HEAD
 
   updateUser: function(e) {
         let data= {
@@ -125,8 +124,6 @@ var ApplicationSettings = React.createClass({
     });
   },
 
-
-=======
     validate: function(key, value) {
         switch(key) {
             case "firstName":
@@ -196,7 +193,6 @@ var ApplicationSettings = React.createClass({
     rbLabels[1].style.display = "block";
     console.log(this.state);
     },
->>>>>>> 8fda4cd4a7b7b06a4aa33c0d9549bdf1425472e5
     render: function() {
 		var lastScrollTop = 0;
 		$(window).scroll(function() {
@@ -266,11 +262,11 @@ var ApplicationSettings = React.createClass({
                             <input type="text"  placeholder='Email' id='email' ref='email' onMouseOut={this.valueChange} />
                         </FormField>
                         <SelectField fieldName="Timezone" className="timezone" fieldID="timezone" changeFunc={this.valueChange} states={this.props.stateOptions} stateFunc={this.makeStateOption} />
-<<<<<<< HEAD
+
                         <Button id="personalButton" fill={true} plain={true} onClick={this.updateUser}>UPDATE</Button>
-=======
+
                         <Button id="personalButton" fill={true} plain={true} onClick={this.notificationsScroll}>NEXT</Button>
->>>>>>> 8fda4cd4a7b7b06a4aa33c0d9549bdf1425472e5
+
                     </div>
                     <div className="notifications" ref="notifications">
                         <FormField>
@@ -283,13 +279,19 @@ var ApplicationSettings = React.createClass({
                         <Button id="privacyButton" fill={true} plain={true} onClick={passwordScroll}>NEXT</Button>
                     </div>
                     <div className="password" ref="password">
-                        <InputField fieldName="Current Password" fieldID="currentPassword" changeFunc={this.valueChange} />
-                        <InputField fieldName="New Password" fieldID="newPassword" changeFunc={this.valueChange} />
-                        <InputField fieldName="Retype New Password" fieldID="retypeNewPassword" changeFunc={this.valueChange} />
+                        <FormField className='currentPassword'>
+                            <input type="text"  placeholder='Current Password' id='currentPassword' ref='currentPassword' onMouseOut={this.valueChange} />
+                        </FormField>
+                        <FormField className='newPassword'>
+                            <input type="text"  placeholder='New Password' id='newPassword' ref='newPassword' onMouseOut={this.valueChange} />
+                        </FormField>
+
                         <Button id="passwordButton" fill={true} plain={true} onClick={deleteAccountScroll}>NEXT</Button>
                     </div>
                     <div className="deleteAccount" ref="deleteAccount" >
-                        <InputField fieldName="Delete Account" fieldID="deleteAccount" help="This action is final and you will be unable to recover any data" changeFunc={this.valueChange} />
+                        <FormField className='deleteAccount'>
+                            <input type="text"  placeholder='Delete Account' id='deleteAccount' ref='deleteAccount' onMouseOut={this.valueChange} />
+                        </FormField>
                         <Button id="deleteButton" fill={true} plain={true} onClick={deleteAccountScroll}>Are you sure?</Button>
                         <Button id="submit" fill={true} plain={true} onClick={deleteAccountScroll}>SUBMIT</Button>
                     </div>

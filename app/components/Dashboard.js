@@ -74,6 +74,12 @@ var Dashboard = React.createClass({
         ReactRouter.browserHistory.push("/#/application");
         window.location.reload();
     },
+
+    goToAssestmentTest: function(e) {
+        e.preventDefault();
+        ReactRouter.browserHistory.push("/#/assestment");
+        window.location.reload();
+    },
     render: function() {
         var profile = getProfile;
         if(localStorage.getItem('signup') == "true") {
@@ -98,6 +104,9 @@ var Dashboard = React.createClass({
                             </div>
                             <div>
                                 <Button onClick={this.goToApplication}>Go to Application</Button>
+                            </div>
+                            <div>
+                                <Button onClick={this.goToAssestmentTest}>Take an Assestment</Button>
                             </div>
                             <div>
                                 <Button onClick={logout}>Log Out</Button>
