@@ -39,7 +39,7 @@ var auth0 = require('../config/auth/AuthService.js').auth0;
 var authCallbackUrl = 'http://localhost:8080/#/dashboard';
 var reactRouterRedirect = '/#/dashboard';
 
-var InputFieldLogin = require('../components/supportComponents/Fields.js').InputFieldLogin;
+//var InputFieldLogin = require('../components/supportComponents/Fields.js').InputFieldLogin;
 var WhatWeDoSection = require('../components/supportComponents/Fields.js').WhatWeDoSection;
 var SocialMediaSet = require('../components/supportComponents/Fields.js').SocialMediaSet;
 
@@ -119,11 +119,13 @@ var Login = React.createClass({
             //     username: this.state.email,
             //     password: this.state.password
             // });
+
+          //this.state.email
           $.ajax({
             type: 'GET',
             dataType: "json",
             crossDomain: true,
-            url: 'http://localhost:9090/nebulaben/benapi/userInfo/validateLogin/' + this.state.email + '/' + this.state.password,
+            url: 'http://localhost:9090/nebulaben/benapi/userInfo/validateLogin/' + this.refs.login_email.value.trim() + '/' + this.refs.login_password.value.trim(),
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
@@ -190,13 +192,15 @@ var Login = React.createClass({
             //     username: this.state.email,
             //     password: this.state.password
             // });
+          console.log('here');
           var dataObj = {
-              "firstName": this.state.firstName,
-            "lastName": this.state.lastName,
-                "email": this.state.email,
-                "hashed_password" : this.state.password
+              firstName: this.refs.signup_firstname.value.trim(),
+            lastName: this.refs.signup_lastname.value.trim(),
+                email: this.refs.signup_email.value.trim(),
+                hashed_password : this.refs.signup_email.value.trim()
           }
           var data = JSON.stringify(dataObj);
+          console.log(data);
           $.ajax({
             type: 'POST',
             dataType: "application/json",
@@ -206,12 +210,16 @@ var Login = React.createClass({
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
-            }
-          }).done( (response) => {
-            localStorage.setItem('user_id', response.id);
-            localStorage.setItem('userData', response);
-            ReactRouter.browserHistory.push(reactRouterRedirect);
-            window.location.reload();
+            },
+            success: (response) => {
+              localStorage.setItem('user_id', response.id);
+              localStorage.setItem('userData', response);
+              ReactRouter.browserHistory.push(reactRouterRedirect);
+              window.location.reload();
+            },
+            error : (xhr, status) => {
+              alert('Sorry, there was a problem!');
+            },
           });
         }
         else {
@@ -272,6 +280,7 @@ var Login = React.createClass({
             });
         }
     },
+  //changeFunc={this.valueChange}
     render: function() {
         return (
             <div className="login" onKeyDown={this.handleKeyPress}>
@@ -295,8 +304,12 @@ var Login = React.createClass({
                                             </div>
                                         </div>
                                         <Form>
-                                            <InputFieldLogin fieldID="email" fieldName="Email Address" changeFunc={this.valueChange} />
-                                            <InputFieldLogin fieldID="password" fieldName="Password" changeFunc={this.valueChange} />
+                                            <FormField className='email'>
+                                                <input type="text"  placeholder='Email' id='email' ref='login_email' onMouseOut={this.valueChange} />
+                                            </FormField>
+                                            <FormField className='password'>
+                                                <input type="text"  placeholder='Password' id='password' ref='login_password' onMouseOut={this.valueChange} />
+                                            </FormField>
                                             <SocialMediaSet authFunc={this.login} />
                                             <Button label="LOGIN" fill={true} id="regular" onClick={this.login} />
                                         </Form>
@@ -314,10 +327,19 @@ var Login = React.createClass({
                                             </div>
                                         </div>
                                         <Form>
-                                            <InputFieldLogin fieldID="firstName" fieldName="First Name" changeFunc={this.valueChange} />
-                                            <InputFieldLogin fieldID="lastName" fieldName="Last Name" changeFunc={this.valueChange} />
-                                            <InputFieldLogin fieldID="email" fieldName="Email Address" changeFunc={this.valueChange} />
-                                            <InputFieldLogin fieldID="password" fieldName="Password" changeFunc={this.valueChange} />
+                                            <FormField className='firstname'>
+                                                <input type="text"  placeholder='Frst Name' id='firstname' ref='signup_firstname'  />
+                                            </FormField>
+                                            <FormField className='password'>
+                                                <input type="text"  placeholder='Last Name' id='lastname' ref='signup_lastname'  />
+                                            </FormField>
+                                            <FormField className='email'>
+                                                <input type="text"  placeholder='Email' id='email' ref='signup_email'  />
+                                            </FormField>
+                                            <FormField className='password'>
+                                                <input type="text"  placeholder='Password' id='password' ref='signup_password'  />
+                                            </FormField>
+
 
                                             <Paragraph id="agreement">
                                                 I agree to the <a target="_blank" href="#/termsofuse">terms of use</a> and <a href="#/privacypolicy" target="_blank">privacy policy</a>

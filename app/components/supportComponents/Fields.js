@@ -23,15 +23,15 @@ var Notification = require('grommet/components/Notification');
 var SearchInput = require('grommet/components/SearchInput');
 
 var Fields = {
-    InputFieldLogin: React.createClass({
-        render: function() {
-            return (
-                <FormField className={this.props.fieldID}>
-                    <input type="text" placeholder={this.props.fieldName} id={this.props.fieldID} onMouseOut={this.props.changeFunc} />
-                </FormField>
-            )
-        }
-    }),
+    // InputFieldLogin: React.createClass({
+    //     render: function() {
+    //         return (
+    //             <FormField className={this.props.fieldID}>
+    //                 <input type="text"  placeholder={this.props.fieldName} id={this.props.fieldID} ref={this.props.fieldRef} onMouseOut={this.props.changeFunc} />
+    //             </FormField>
+    //         )
+    //     }
+    // }),
     WhatWeDoSection: React.createClass({
         render: function() {
             return (

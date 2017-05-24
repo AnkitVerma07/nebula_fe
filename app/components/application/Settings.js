@@ -82,6 +82,43 @@ var ApplicationSettings = React.createClass({
 	getInitialState: function() {
 		return {}
 	},
+
+  updateUser: function(e) {
+        let data= {
+            id: localStorage.getItem('user_id')
+        };
+        if(this.refs.firstName.value){
+            data.firstName = this.refs.firstName.value.trim();
+        }
+    if(this.refs.lastName.value){
+      data.lastName = this.refs.lastName.value.trim();
+    }
+    if(this.refs.email.value){
+      data.email = this.refs.email.value.trim();
+    }
+
+    var D = JSON.stringify(data);
+    console.log(D);
+    $.ajax({
+      type: 'POST',
+      dataType: "application/json",
+      crossDomain: true,
+      url: 'http://localhost:9090/nebulaben/benapi/userInfo/updateUser',
+      data: D,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      success: (response) => {
+        console.log(response);
+      },
+      error : (xhr, status) => {
+        alert('Sorry, there was a problem!');
+      },
+    });
+  },
+
+
     render: function() {
 		var lastScrollTop = 0;
 		$(window).scroll(function() {
@@ -141,11 +178,17 @@ var ApplicationSettings = React.createClass({
                 </div>
                 <div className="content">
                     <div className="personal" ref="personal">
-                        <InputField fieldName="First Name" fieldID="firstName" changeFunc={this.valueChange} />
-                        <InputField fieldName="Last Name" fieldID="lastName" changeFunc={this.valueChange} />
-                        <InputField fieldName="Email" fieldID="email" changeFunc={this.valueChange} />
+                        <FormField className='firstName'>
+                            <input type="text"  placeholder='First Name' id='firstName' ref='firstName' onMouseOut={this.valueChange} />
+                        </FormField>
+                        <FormField className='lastName'>
+                            <input type="text"  placeholder='Last Name' id='lastName' ref='lastName' onMouseOut={this.valueChange} />
+                        </FormField>
+                        <FormField className='email'>
+                            <input type="text"  placeholder='Email' id='email' ref='email' onMouseOut={this.valueChange} />
+                        </FormField>
                         <SelectField fieldName="Timezone" className="timezone" fieldID="timezone" changeFunc={this.valueChange} states={this.props.stateOptions} stateFunc={this.makeStateOption} />
-                        <Button id="personalButton" fill={true} plain={true} onClick={notificationsScroll}>NEXT</Button>
+                        <Button id="personalButton" fill={true} plain={true} onClick={this.updateUser}>UPDATE</Button>
                     </div>
                     <div className="notifications" ref="notifications">
                         <FormField>

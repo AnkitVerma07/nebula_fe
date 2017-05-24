@@ -11,6 +11,7 @@ var RadioButton = require('grommet/components/RadioButton');
 var Button = require('grommet/components/Button');
 var Calendar = require('grommet/components/Calendar');
 var SearchInput = require('grommet/components/SearchInput');
+var FormField = require('grommet/components/FormField');
 
 var InputField = require('../../components/supportComponents/Fields.js').InputField;
 var SelectField = require('../../components/supportComponents/Fields.js').SelectField;
@@ -135,6 +136,85 @@ var ApplicationGeneral = React.createClass({
 		}.bind(this);
 		reader.readAsDataURL(file);
 	},
+
+  updateUser: function(e) {
+    let userData= {
+      id: localStorage.getItem('user_id')
+    };
+    if(this.refs.firstName.value){
+      userData.firstName = this.refs.firstName.value.trim();
+    }
+    if(this.refs.lastName.value){
+      userData.lastName = this.refs.lastName.value.trim();
+    }
+    if(this.refs.email.value){
+      userData.email = this.refs.email.value.trim();
+    }
+    if(this.refs.preferredName.value){
+      userData.preferredName = this.refs.preferredName.value.trim();
+    }
+    if(this.refs.phoneNumber.value){
+      userData.phoneNumber = this.refs.phoneNumber.value.trim();
+    }
+    if(this.refs.fbURL.value){
+      userData.fbURL = this.refs.fbURL.value.trim();
+    }
+    if(this.refs.portfolioURL.value){
+      userData.portfolioURL = this.refs.portfolioURL.value.trim();
+    }
+    if(this.refs.videoURL.value){
+      userData.videoURL = this.refs.videoURL.value.trim();
+    }
+    if(this.refs.aboutMe.value){
+      userData.aboutMe = this.refs.aboutMe.value.trim();
+    }
+
+    var D = JSON.stringify(userData);
+    console.log(D);
+    $.ajax({
+      type: 'POST',
+      dataType: "application/json",
+      crossDomain: true,
+      url: 'http://localhost:9090/nebulaben/benapi/userInfo/updateUser',
+      data: D,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      success: (response) => {
+        console.log(response);
+      },
+      error : (xhr, status) => {
+        alert('Sorry, there was a problem!');
+      },
+    });
+
+
+    let locationData= {
+    };
+    if(this.refs.address1.value){
+      locationData.street_address1 = this.refs.address1.value.trim();
+    }
+    if(this.refs.address2.value){
+      locationData.street_address2 = this.refs.address2.value.trim();
+    }
+    if(this.refs.city.value){
+      locationData.city = this.refs.city.value.trim();
+    }
+    if(this.refs.state.value){
+      locationData.state = this.refs.state.value.trim();
+    }
+    if(this.refs.zipcode.value){
+      locationData.zipcode = this.refs.zipcode.value.trim();
+    }
+    if(this.refs.country.value){
+      locationData.country = this.refs.country.value.trim();
+    }
+
+
+  },
+
+
     render: function() {
         var lastScrollTop = 0;
         $(window).scroll(function() {
@@ -221,23 +301,41 @@ var ApplicationGeneral = React.createClass({
 						<Button ref="profilePhotoNext" fill={true} plain={true} onClick={nameLinkScroll} label="NEXT" />
 					</div>
 					<div className="nameLink" ref="nameLink">
-						<InputField fieldName="First Name" fieldID="firstName" changeFunc={this.valueChange} />
-						<InputField fieldName="Last Name" fieldID="lastName" changeFunc={this.valueChange} />
-						<InputField fieldName="Preferred Name" fieldID="preferredName" changeFunc={this.valueChange} />
+						<FormField className='firstName'>
+							<input type="text"  placeholder='First Name' id='firstName' ref='firstName' onMouseOut={this.valueChange} />
+						</FormField>
+						<FormField className='lastName'>
+							<input type="text"  placeholder='Last Name' id='lastName' ref='lastName' onMouseOut={this.valueChange} />
+						</FormField>
+						<FormField className='preferredName'>
+							<input type="text"  placeholder='Preferred Name' id='preferredName' ref='preferredName' onMouseOut={this.valueChange} />
+						</FormField>
 						<Button id="nameButton" fill={true} plain={true} onClick={contactInformationScroll}>NEXT</Button>
 					</div>
 					<div className="contactInformation" ref="contactInformation">
-						<InputField fieldName="Email" fieldID="email" changeFunc={this.valueChange} />
-						<InputField fieldName="Phone Number" fieldID="phoneNumber" changeFunc={this.valueChange} />
+						<FormField className='email'>
+							<input type="text"  placeholder='Email' id='email' ref='email' onMouseOut={this.valueChange} />
+						</FormField>
+						<FormField className='phoneNumber'>
+							<input type="text"  placeholder='Phone Number' id='phoneNumber' ref='phoneNumber' onMouseOut={this.valueChange} />
+						</FormField>
 						<Button id="contactButton" fill={true} plain={true} onClick={addressScroll}>NEXT</Button>
 					</div>
 					<div className="address" ref="address">
-						<InputField fieldName="Address 1" fieldID="address1" changeFunc={this.valueChange} />
-						<InputField fieldName="Address 2" fieldID="address2" changeFunc={this.valueChange} />
-						<InputField className="city" fieldName="City" fieldID="city" changeFunc={this.valueChange} />
+						<FormField className='address1'>
+							<input type="text"  placeholder='Address 1' id='address1' ref='address1' onMouseOut={this.valueChange} />
+						</FormField>
+						<FormField className='address2'>
+							<input type="text"  placeholder='Address 2' id='address2' ref='address2' onMouseOut={this.valueChange} />
+						</FormField>
+						<FormField className='city'>
+							<input type="text"  placeholder='City' id='city' ref='city' onMouseOut={this.valueChange} />
+						</FormField>
 						<SelectField className="state" fieldName="State" fieldID="currentState" changeFunc={this.valueChange} states={this.props.stateOptions} stateFunc={this.makeStateOption} />
 						<SelectField fieldName="Country" fieldID="currentCountry" changeFunc={this.valueChange} states={this.props.stateOptions} stateFunc={this.makeStateOption} />
-						<InputField fieldName="Zip Code" fieldID="zipCode" changeFunc={this.valueChange} />
+						<FormField className='zipcode'>
+							<input type="text"  placeholder='Zipcode' id='zipcode' ref='zipcode' onMouseOut={this.valueChange} />
+						</FormField>
 						<Button fill={true} plain={true} onClick={basicScroll}>NEXT</Button>
 					</div>
 					<div className="basic" ref="basic">
@@ -246,9 +344,15 @@ var ApplicationGeneral = React.createClass({
 						<Button fill={true} plain={true} onClick={linksScroll}>NEXT</Button>
 					</div>
 					<div className="links" ref="links">
-						<InputField fieldName="Facebook URL" fieldID="fbURL" changeFunc={this.valueChange} />
-						<InputField fieldName="Portfolio URL" fieldID="portfolioURL" changeFunc={this.valueChange} />
-						<InputField fieldName="Video URL" fieldID="videoURL" changeFunc={this.valueChange} />
+						<FormField className='fbURL'>
+							<input type="text"  placeholder='Facebook URL' id='fbURL' ref='fbURL' onMouseOut={this.valueChange} />
+						</FormField>
+						<FormField className='portfolioURL'>
+							<input type="text"  placeholder='Portfolio URL' id='portfolioURL' ref='portfolioURL' onMouseOut={this.valueChange} />
+						</FormField>
+						<FormField className='videoURL'>
+							<input type="text"  placeholder='Video URL' id='videoURL' ref='videoURL' onMouseOut={this.valueChange} />
+						</FormField>
 						<Button fill={true} plain={true} onClick={educationScroll}>NEXT</Button>
 					</div>
 					<div className="education" ref="education">
@@ -259,7 +363,7 @@ var ApplicationGeneral = React.createClass({
 					</div>
 					<div className="aboutMe" ref="aboutMe">
 						<TextAreaField fieldName="About Me" fieldID="aboutMe" changeFunc={this.valueChange} />
-						<Button fill={true} plain={true} onClick={aboutMeScroll}>SUBMIT</Button>
+						<Button fill={true} plain={true} onClick={this.updateUser}>SUBMIT</Button>
 					</div>
 					<div className="filler">
 					</div>

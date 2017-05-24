@@ -19,12 +19,12 @@ var Validation = {
 	validateName: function(nameType, name) {
 		if((name.length) > maxInputLength) {
 			console.log('length of ' + nameType + ' must be less than 50');
-			document.getElementById(nameType).value = "";
+			//document.getElementById(nameType).value = "";
 			return false;
 		}
 		else if(!(nameRegex.test(name))) {
 			console.log(nameType + ' cannot contain numbers');
-			document.getElementById(nameType).value = "";
+			//document.getElementById(nameType).value = "";
 			return false;
 		}
 		return true;
@@ -32,12 +32,12 @@ var Validation = {
 	validateEmail: function(emailType, email) {
 		if((email.length) > maxInputLength) {
 			console.log('length of ' + emailType + ' must be less than 50');
-			document.getElementById(emailType).value = "";
+			//document.getElementById(emailType).value = "";
 			return false;
 		}
 		else if(!(emailRegex.test(email))) {
 			console.log(emailType + ' must be in correct format');
-			document.getElementById(emailType).value = "";
+			//document.getElementById(emailType).value = "";
 			return false;
 		}
 		return true;
@@ -45,7 +45,7 @@ var Validation = {
 	validatePassword: function(passwordType, password) {
 		if((password.length) < minPasswordLength) {
 			console.log('length of ' + passwordType + ' must be more than 10');
-			document.getElementById(passwordType).value = "";
+			//document.getElementById(passwordType).value = "";
 			return false;
 		}
 		return true;
@@ -53,12 +53,12 @@ var Validation = {
 	validatePhone: function(phoneType, phone) {
 		if((phone.length) > maxPhoneLength) {
 			console.log('length of ' + phoneType + ' must be 10 digits');
-			document.getElementById(phoneType).value = " ";
+		//	document.getElementById(phoneType).value = " ";
 			return false;
 		}
 		else if(!(phoneRegex.test(phone))) {
 			console.log(phoneType + ' must only contain numbers');
-			document.getElementById(phoneType).value = " ";
+			//document.getElementById(phoneType).value = " ";
 			return false;
 		}
 		return true;
@@ -66,7 +66,7 @@ var Validation = {
 	validateAddress: function(addressType, address) {
 		if((address.length) > maxAddressLength) {
 			console.log('length of ' + addressType + ' must be less than 50');
-			document.getElementById(addressType).value = " ";
+			//document.getElementById(addressType).value = " ";
 			return false;
 		}
 		return true;
@@ -74,7 +74,7 @@ var Validation = {
 	validateZipcode: function(zipcodeType, zipcode) {
 		if(!zipcodeRegex.test(zipcode)) {
 			console.log(zipcodeType + ' must be numerical');
-			document.getElementById(zipcodeType).value = " ";
+		//	document.getElementById(zipcodeType).value = " ";
 			return false;
 		}
 		return true;
@@ -82,7 +82,7 @@ var Validation = {
 	validateURL: function(urlType, url) {
 		if(!urlRegex.test(url)) {
 			console.log(urlType + ' must be in the correct format');
-			document.getElementById(urlType).value = " ";
+		//	document.getElementById(urlType).value = " ";
 			return false;
 		}
 		return true;
@@ -90,7 +90,7 @@ var Validation = {
 	validateAboutMe: function(aboutMeType, aboutMe) {
 		if((aboutMe.length) > maxAboutMeLength) {
 			console.log('length of ' + aboutMeType + ' must be less than 500 characters');
-			document.getElementById(aboutMeType).value = " ";
+		//	document.getElementById(aboutMeType).value = " ";
 			return false;
 		}
 		return true;
@@ -98,12 +98,12 @@ var Validation = {
 	validateGPA: function(gpaType, gpa) {
 		if((gpa.length) > maxGPALength) {
 			console.log(gpaType + ' must be limited to 2 decimal places');
-			document.getElementById(gpaType).value = " ";
+		//	document.getElementById(gpaType).value = " ";
 			return false;
 		}
 		else if(!gpaRegex.test(gpa)) {
 			console.log(gpaType + " must be numerical");
-			document.getElementById(gpaType).value = " ";
+		//	document.getElementById(gpaType).value = " ";
 			return false;
 		}
 		return true;
