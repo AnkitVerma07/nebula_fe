@@ -32,20 +32,20 @@ var skillsUrl = "http://ben.nebula.careers:8080/ben/nebula_fe/data/skills.json";
 
 var requireAuth = require('../config/auth/AuthService.js').requireAuth;
 var requireAdminAuth = require('../config/auth/AuthService.js').requireAdminAuth;
-
+//[dashboard,application] auth required: onEnter={requireAuth}
 var routes = (
 	<Router history={appHistory}>
 		<Route path="/" component={LoginContainer} />
 		<Route path="application" header="Application" 
 			statesUrl={statesUrl} skillsUrl={skillsUrl} 
 			universityUrl={universityUrl} 
-			component={ApplicationContainer} onEnter={requireAuth}
+			component={ApplicationContainer}
 		/>
 		<Route path="aboutus" header="About Us" component={AboutUsContainer} />
 		<Route path="contactus" header="Contact Us" component={ContactUsContainer} />
 		<Route path="privacypolicy" header="Privacy Policy" component={PrivacyPolicyContainer} />
 		<Route path="contactus_employer" header="Contact Us - Institution" component={ContactUsEmployerContainer} />
-		<Route path="dashboard" header="Dashboard" component={DashboardContainer} onEnter={requireAuth} />
+		<Route path="dashboard" header="Dashboard" component={DashboardContainer}  />
 		<Route path="termsofuse" header="Terms Of Use" component={TermsOfUseContainer} />
 		<Route path="admin" header="Admin Page" component={AdminContainer} onEnter={requireAdminAuth} />
 		<Route path="login" component={LoginContainer} />

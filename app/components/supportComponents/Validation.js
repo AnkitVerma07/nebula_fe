@@ -50,6 +50,41 @@ var Validation = {
 		}
 		return true;
 	},
+
+    validateName_signup: function(nameType, name) {
+        if((name.length) > maxInputLength) {
+            console.log('length of ' + nameType + ' must be less than 50');
+            document.getElementById(nameType).value = "";
+            return false;
+        }
+        else if(!(nameRegex.test(name))) {
+            console.log(nameType + ' cannot contain numbers');
+            document.getElementById(nameType).value = "";
+            return false;
+        }
+        return true;
+    },
+    validateEmail_signup: function(emailType, email) {
+        if((email.length) > maxInputLength) {
+            console.log('length of ' + emailType + ' must be less than 50');
+            document.getElementById(emailType).value = "";
+            return false;
+        }
+        else if(!(emailRegex.test(email))) {
+            console.log(emailType + ' must be in correct format');
+            document.getElementById(emailType).value = "";
+            return false;
+        }
+        return true;
+    },
+    validatePassword_signup: function(passwordType, password) {
+        if((password.length) < minPasswordLength) {
+            console.log('length of ' + passwordType + ' must be more than 10');
+            document.getElementById(passwordType).value = "";
+            return false;
+        }
+        return true;
+    },
 	validatePhone: function(phoneType, phone) {
 		if((phone.length) > maxPhoneLength) {
 			console.log('length of ' + phoneType + ' must be 10 digits');
