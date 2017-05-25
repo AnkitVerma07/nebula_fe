@@ -29,6 +29,7 @@ var validateURL = require('../supportComponents/Validation.js').validateURL;
 var validateAboutMe = require('../supportComponents/Validation.js').validateAboutMe;
 var validateGPA = require('../supportComponents/Validation.js').validateGPA;
 
+var Question = require('../../components/application/Question.js');
 
 var InputField = require('../supportComponents/Fields.js').InputField;
 var SelectField = require('../supportComponents/Fields.js').SelectField;
@@ -41,22 +42,12 @@ require('../../styles/application.scss');
 var Assestment = React.createClass({
     componentDidMount: function() {
 
-        var options = [
-            { value: 'one', label: 'One' },
-            { value: 'two', label: 'Two' }
-        ];
-        this.setState({
-            options: options,
-
-        });
-
-
         var id = 1;
         $.ajax({
             type: 'GET',
             dataType: "json",
             crossDomain: true,
-            url: 'http://localhost:9090/nebulaben/benapi/surveyInfo/getSurvey/' + id,
+            url: 'http://localhost:9090/nebulaben/benapi/assestmentInfo/getAssestment/' + id,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -72,23 +63,58 @@ var Assestment = React.createClass({
                 alert('Sorry, there was a problem!');
             },
         });
+
     },
     getInitialState: function() {
         return {
+            questions: [{
+                id: 1,
+                text: 'do you like me?',
+                type: 'negative',
+                choices: ['1', '2', '3', '4', '5']
+            }, {
+              id: 2,
+              text: 'do you love me?',
+              type: 'postive',
+              choices: ['1', '2', '3', '4', '5']
+            }],
+          test_taken_data: [],
+          questions_taken: {}
         }
-    },
-    logChange: function(val) {
-        this.setState({ val });
     },
 
     submitAssesment: function(e) {
-
-            console.log( this.state);
+      console.log('question', this.state)
 
     },
 
-    render: function() {
+  questionCallback: function(val, question) {
 
+    let array = this.state.test_taken_data;
+
+    let flag = true;
+
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].s == question) {
+        array[i].i = parseInt(val);
+        flag = false;
+      }
+    }
+
+    if (flag) {
+      array.push({
+        s: question,
+        i: parseInt(val)
+      })
+    }
+
+    this.setState({
+      test_taken_data: array
+    });
+
+  },
+
+    render: function() {
         return (
             <div id="settingsTab" className="main">
                 <div className="title">
@@ -96,20 +122,31 @@ var Assestment = React.createClass({
                 </div>
                 <div className="content">
                     <div className="personal" ref="personal">
-                        <div  className="question" ref="question">
-                            <Label className="question_text">
-                                Question
-                            </Label>
-                            <Select
-                                name="form-field-name"
-                                value={this.state.val}
-                                options={this.state.options}
-                                onChange={this.logChange}
-                            />
-                        </div>
-                        <Button id="personalButton" fill={true} plain={true} onClick={this.submitAssesment}>SUBMIT</Button>
+
+                      {this.state.questions.map((question) => {
+                        return <Question ref={question.id} answerCallback={this.questionCallback} question={question} key={question.id} />
+                      })}
 
                     </div>
+
+                    <div className="address" ref="address">
+                        <FormField className='address1'>
+                            <input type="text"  placeholder='Address 1' id='address1' ref='address1' onMouseOut={this.valueChange} />
+                        </FormField>
+                        <FormField className='address2'>
+                            <input type="text"  placeholder='Address 2' id='address2' ref='address2' onMouseOut={this.valueChange} />
+                        </FormField>
+                        <FormField className='city'>
+                            <input type="text"  placeholder='City' id='city' ref='city' onMouseOut={this.valueChange} />
+                        </FormField>
+                        <SelectField className="state" fieldName="State" fieldID="currentState" changeFunc={this.valueChange} states={this.props.stateOptions} stateFunc={this.makeStateOption} />
+                        <SelectField fieldName="Country" fieldID="currentCountry" changeFunc={this.valueChange} states={this.props.stateOptions} stateFunc={this.makeStateOption} />
+                        <FormField className='zipcode'>
+                            <input type="text"  placeholder='Zipcode' id='zipcode' ref='zipcode' onMouseOut={this.valueChange} />
+                        </FormField>
+                        <Button id="personalButton" fill={true} plain={true} onClick={this.submitAssesment}>SUBMIT</Button>
+                    </div>
+
                     <div className="filler">
                     </div>
                 </div>

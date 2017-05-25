@@ -192,7 +192,7 @@ var Login = React.createClass({
               firstName: this.refs.signup_firstname.value.trim(),
             lastName: this.refs.signup_lastname.value.trim(),
                 email: this.refs.signup_email.value.trim(),
-                hashed_password : this.refs.password.value.trim()
+                hashed_password : this.refs.signup_password.value.trim()
           }
           var data = JSON.stringify(dataObj);
           console.log(data);

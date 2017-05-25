@@ -240,10 +240,9 @@ var Application = React.createClass({
 							<Tab title="SKILLS">
 								<ApplicationSkills />
 							</Tab>
-                            <Tab title="ASSESTMENT">
-                                <AssestmentTaking />
-                            </Tab>
-
+							<Tab title="ASSESTMENT">
+                 <AssestmentTaking />
+              </Tab>
 						</Tabs>
 						<NebulaFooter />
 					</div>
