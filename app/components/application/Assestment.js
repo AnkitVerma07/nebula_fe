@@ -42,20 +42,21 @@ require('../../styles/application.scss');
 var Assestment = React.createClass({
     componentDidMount: function() {
 
-        var id = 1;
+        localStorage.setItem('assestment_id', 1)
         $.ajax({
             type: 'GET',
             dataType: "json",
             crossDomain: true,
-            url: 'http://localhost:9090/nebulaben/benapi/assestmentInfo/getAssestment/' + id,
+            url: 'http://localhost:9090/nebulaben/benapi/assestmentInfo/getAssestment/' + localStorage.getItem('assestment_id'),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             success: (response) => {
+                console.log();
                 this.setState({
                     survey: response,
-
+                    questions: response.questionList
                 });
 
             },
@@ -67,24 +68,41 @@ var Assestment = React.createClass({
     },
     getInitialState: function() {
         return {
-            questions: [{
-                id: 1,
-                text: 'do you like me?',
-                type: 'negative',
-                choices: ['1', '2', '3', '4', '5']
-            }, {
-              id: 2,
-              text: 'do you love me?',
-              type: 'postive',
-              choices: ['1', '2', '3', '4', '5']
-            }],
+            questions: [],
           test_taken_data: [],
-          questions_taken: {}
+            score: 0
         }
     },
 
     submitAssesment: function(e) {
-      console.log('question', this.state)
+      console.log('question', this.state);
+
+
+        let userData = {
+            score: this.state.score,
+            answersList: this.state.test_taken_data
+        };
+
+        var D = JSON.stringify(userData);
+        console.log(D);
+        $.ajax({
+            type: 'POST',
+            dataType: "application/json",
+            crossDomain: true,
+            url: 'http://localhost:9090/nebulaben/benapi/assestmentInfo/'+ localStorage.getItem('user_id') + '/assestmentTaken/' + localStorage.getItem('assestment_id'),
+            data: D,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            success: (response) => {
+                console.log(response);
+            },
+            error : (xhr, status) => {
+                alert('Sorry, there was a problem!');
+            },
+        });
+
 
     },
 
@@ -108,9 +126,14 @@ var Assestment = React.createClass({
       })
     }
 
+     let totalScore = (this.state.score + val)/this.state.questions.length;
     this.setState({
-      test_taken_data: array
+      test_taken_data: array,
+        score: totalScore
     });
+
+
+
 
   },
 

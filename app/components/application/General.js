@@ -211,6 +211,26 @@ var ApplicationGeneral = React.createClass({
       locationData.country = this.refs.country.value.trim();
     }
 
+      var L = JSON.stringify(locationData);
+
+      $.ajax({
+          type: 'POST',
+          dataType: "application/json",
+          crossDomain: true,
+          url: 'http://localhost:9090/nebulaben/benapi/locationInfo/insertUserLocation/' + localStorage.getItem('user_id'),
+          data: L,
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          success: (response) => {
+              console.log(response);
+          },
+          error : (xhr, status) => {
+              alert('Sorry, there was a problem!');
+          },
+      });
+
 
   },
 

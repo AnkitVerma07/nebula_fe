@@ -60,33 +60,7 @@ var Question = React.createClass({
     }
   },
   logChange: function(val) {
-
     this.setState({ val });
-
-  //  var value = 0;
-
-    // if(this.props.question.type === 'positive'){
-    //   value = this.state.score + parseInt(val.value);
-    // }
-    // if(this.props.question.type === 'negative'){
-    //   let v = 0;
-    //   if(parseInt(val.value) == 1){
-    //     v = 5;
-    //   }
-    //   if(parseInt(val.value) == 2){
-    //     v = 4
-    //   }
-    //   if(parseInt(val.value) == 3){
-    //     v = 3;
-    //   }
-    //   if(parseInt(val.value) == 4){
-    //     v = 2;
-    //   }
-    //   if(parseInt(val.value) == 5){
-    //     v = 1;
-    //   }
-    //   value = this.state.score + v;
-    // }
   },
 
   render: function() {
@@ -97,7 +71,7 @@ var Question = React.createClass({
                 {this.props.question.id}
               </p>
               <Label className="question_text">
-                {this.props.question.text}
+                {this.props.question.question}
               </Label>
               <Select
                 name="form-field-name"
@@ -105,7 +79,7 @@ var Question = React.createClass({
                 options={this.state.options}
                 onChange={(value) => {
                   this.logChange(value);
-                  this.props.answerCallback(value.value, this.props.question.text);
+                  this.props.answerCallback(value.value, this.props.question.question);
                 }}
               />
             </div>
