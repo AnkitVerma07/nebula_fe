@@ -65,6 +65,29 @@ var Assestment = React.createClass({
             },
         });
 
+
+        var options = [
+            { value: '1', label: 'Strong agreed' },
+            { value: '2', label: 'agreed' },
+            { value: '3', label: 'neither agree or disagree' },
+            { value: '4', label: 'disagree' },
+            { value: '5', label: 'Strong disagree' }
+        ];
+
+        var options2 = [
+            { value: '1', label: '1' },
+            { value: '2', label: '2' },
+            { value: '3', label: '3' },
+            { value: '4', label: '4' },
+            { value: '5', label: '5' }
+        ];
+
+        this.setState({
+            options: options,
+            options2: options2
+
+        });
+
     },
     getInitialState: function() {
         return {
@@ -77,9 +100,10 @@ var Assestment = React.createClass({
     submitAssesment: function(e) {
       console.log('question', this.state);
 
+        let updatedScore = this.state.score/this.state.questions.length;
 
         let userData = {
-            score: this.state.score,
+            score: updatedScore,
             answersList: this.state.test_taken_data
         };
 
@@ -126,16 +150,21 @@ var Assestment = React.createClass({
       })
     }
 
-     let totalScore = (this.state.score + val)/this.state.questions.length;
+     let totalScore = (this.state.score + val);
     this.setState({
       test_taken_data: array,
         score: totalScore
     });
-
-
-
-
   },
+
+    notificationsScroll: function() {
+        $('.notifications')[0].scrollIntoView({block: "start", behavior: "smooth"});
+        unsetRBsSettings();
+        document.getElementById('notificationsRB').checked = true;
+        var rbLabels = $('.grommetux-radio-button__label');
+        rbLabels[1].style.display = "block";
+        console.log(this.state);
+    },
 
     render: function() {
         return (
@@ -145,9 +174,13 @@ var Assestment = React.createClass({
                 </div>
                 <div className="content">
                     <div className="personal" ref="personal">
-
                       {this.state.questions.map((question) => {
-                        return <Question ref={question.id} answerCallback={this.questionCallback} question={question} key={question.id} />
+
+                        return (
+                            <div className={question.id} ref={question.id}>
+                            <Question ref={question.id} answerCallback={this.questionCallback} options={this.state.options} options2={this.state.options2} question={question} key={question.id} />
+                            </div>
+                        )
                       })}
 
                     </div>

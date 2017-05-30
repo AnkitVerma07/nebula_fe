@@ -38,19 +38,35 @@ var PrivacyField = require('../supportComponents/Fields.js').PrivacyField;
 /* SASS includes */
 require('../../styles/application.scss');
 
+function UserGreeting(props) {
+    return <h1>Welcome back!</h1>;
+}
+
+function GuestGreeting(props) {
+    return <h1>Please sign up.</h1>;
+}
+
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return <UserGreeting />;
+    }
+    return <GuestGreeting />;
+}
 
 var Question = React.createClass({
   componentDidMount: function() {
 
     var options = [
-      { value: '1', label: '1' },
-      { value: '2', label: '2' },
-      { value: '3', label: '3' },
-      { value: '4', label: '4' },
-      { value: '5', label: '5' }
+      { value: '1', label: 'Strong agreed' },
+      { value: '2', label: 'agreed' },
+      { value: '3', label: 'neither agree or disagree' },
+      { value: '4', label: 'disagree' },
+      { value: '5', label: 'Strong disagree' }
     ];
+
     this.setState({
-      options: options,
+      options: options
 
     });
 
@@ -63,6 +79,7 @@ var Question = React.createClass({
     this.setState({ val });
   },
 
+
   render: function() {
 
     return (
@@ -73,6 +90,7 @@ var Question = React.createClass({
               <Label className="question_text">
                 {this.props.question.question}
               </Label>
+                <Greeting isLoggedIn={false} />
               <Select
                 name="form-field-name"
                 value={this.state.val}
@@ -80,6 +98,7 @@ var Question = React.createClass({
                 onChange={(value) => {
                   this.logChange(value);
                   this.props.answerCallback(value.value, this.props.question.question);
+
                 }}
               />
             </div>
