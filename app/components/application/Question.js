@@ -34,24 +34,38 @@ var Question = require('../../components/application/Question.js');
 var InputField = require('../supportComponents/Fields.js').InputField;
 var SelectField = require('../supportComponents/Fields.js').SelectField;
 var PrivacyField = require('../supportComponents/Fields.js').PrivacyField;
+var StarField = require('../../components/supportComponents/Fields.js').StarField;
 
 /* SASS includes */
 require('../../styles/application.scss');
 
-function UserGreeting(props) {
-    return <h1>Welcome back!</h1>;
+function FiveStarChoice(props) {
+    return (
+      <StarField fieldName="Rate your Job Experience" fieldID="ratingsBox" changeFunc={this.valueChange} />
+    );
 }
 
-function GuestGreeting(props) {
-    return <h1>Please sign up.</h1>;
+function SelectChoice(props) {
+  return (
+    <Select
+      name="form-field-name"
+      value={props.val}
+      options={props.options}
+      onChange={(value) => {
+        this.logChange(value);
+        props.answerCallback(value.value, props.question.question);
+      }}
+    />
+  );
 }
 
-function Greeting(props) {
-    const isLoggedIn = props.isLoggedIn;
-    if (isLoggedIn) {
-        return <UserGreeting />;
+function Choices(props) {
+    const type = props.question.type;
+    if (type === '5star') {
+        return <FiveStarChoice question={props.question} answerCallback={props.answerCallback}/>;
+    } else if(type === 'multipleChoice') {
+      return <SelectChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val}/>;
     }
-    return <GuestGreeting />;
 }
 
 var Question = React.createClass({
@@ -90,17 +104,7 @@ var Question = React.createClass({
               <Label className="question_text">
                 {this.props.question.question}
               </Label>
-                <Greeting isLoggedIn={false} />
-              <Select
-                name="form-field-name"
-                value={this.state.val}
-                options={this.state.options}
-                onChange={(value) => {
-                  this.logChange(value);
-                  this.props.answerCallback(value.value, this.props.question.question);
-
-                }}
-              />
+                <Choices question={this.props.question} answerCallback={this.props.answerCallback} options={this.state.options} val={this.state.val}/>
             </div>
     )
   }

@@ -74,18 +74,8 @@ var Assestment = React.createClass({
             { value: '5', label: 'Strong disagree' }
         ];
 
-        var options2 = [
-            { value: '1', label: '1' },
-            { value: '2', label: '2' },
-            { value: '3', label: '3' },
-            { value: '4', label: '4' },
-            { value: '5', label: '5' }
-        ];
-
         this.setState({
-            options: options,
-            options2: options2
-
+            options: options
         });
 
     },
@@ -178,7 +168,7 @@ var Assestment = React.createClass({
 
                         return (
                             <div className={question.id} ref={question.id}>
-                            <Question ref={question.id} answerCallback={this.questionCallback} options={this.state.options} options2={this.state.options2} question={question} key={question.id} />
+                            <Question ref={question.id} answerCallback={this.questionCallback} options={this.state.options}  question={question} key={question.id} />
                             </div>
                         )
                       })}
