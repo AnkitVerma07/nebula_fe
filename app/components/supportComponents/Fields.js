@@ -339,8 +339,7 @@ var Fields = {
             var starContainer = document.getElementsByClassName('stars')[0];
             var stars = Array.prototype.slice.call(starContainer.children);
             var totalStars = stars.length;
-
-            starContainer.addEventListener('click', function(e) {
+          starContainer.addEventListener('click', function(e) {
                 var index = stars.indexOf(e.target);
                 var count = count = totalStars - index;
                 for(var i = 0; i < stars.length; i++) {
@@ -348,7 +347,10 @@ var Fields = {
                 }
                 e.target.classList.add('is-selected');
                 alert(count);
+                console.log(this.props);
             });
+          this.props.changeFunc( count);
+          this.props.answerCallback(count, this.props.question);
         },
         render: function() {
             return (
@@ -363,27 +365,27 @@ var Fields = {
                             
                             <div className="starSet">
                                 <div className="stars">
-                                    <a className="star" preserveaspectratio="xMinYMin">
+                                    <a className="star" preserveAspectRatio="xMinYMin">
                                         <svg preserveAspectRatio="xMinYMin">
                                             <use transform="scale(0.4)" xlinkHref="#star"></use>
                                         </svg>
                                     </a>
-                                    <a className="star" preserveaspectratio="xMinYMin">
+                                    <a className="star" preserveAspectRatio="xMinYMin">
                                         <svg preserveAspectRatio="xMinYMin">
                                             <use transform="scale(0.4)" xlinkHref="#star"></use>
                                         </svg>
                                     </a>
-                                    <a className="star" preserveaspectratio="xMinYMin">
+                                    <a className="star" preserveAspectRatio="xMinYMin">
                                         <svg preserveAspectRatio="xMinYMin">
                                             <use transform="scale(0.4)" xlinkHref="#star"></use>
                                         </svg>
                                     </a>
-                                    <a className="star" preserveaspectratio="xMinYMin">
+                                    <a className="star" preserveAspectRatio="xMinYMin">
                                         <svg preserveAspectRatio="xMinYMin">
                                             <use transform="scale(0.4)" xlinkHref="#star"></use>
                                         </svg>
                                     </a>
-                                    <a className="star" preserveaspectratio="xMinYMin">
+                                    <a className="star" preserveAspectRatio="xMinYMin">
                                         <svg preserveAspectRatio="xMinYMin">
                                             <use transform="scale(0.4)" xlinkHref="#star"></use>
                                         </svg>

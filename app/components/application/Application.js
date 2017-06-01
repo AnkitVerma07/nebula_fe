@@ -62,7 +62,7 @@ var ApplicationGeneral = require('../../components/application/General.js');
 var ApplicationAcademic = require('../../components/application/Academic.js');
 var ApplicationExperience = require('../../components/application/Experience.js');
 var ApplicationSkills = require('../../components/application/Skills.js');
-var AssestmentTaking = require('../../components/application/Assestment.js');
+var SurveyTaking = require('../../components/application/Survey.js');
 
 var Application = React.createClass({
 	componentDidMount: function() {
@@ -240,8 +240,8 @@ var Application = React.createClass({
 							<Tab title="SKILLS">
 								<ApplicationSkills />
 							</Tab>
-							<Tab title="ASSESTMENT">
-                 <AssestmentTaking />
+							<Tab title="Survey">
+                 <SurveyTaking />
               </Tab>
 						</Tabs>
 						<NebulaFooter />

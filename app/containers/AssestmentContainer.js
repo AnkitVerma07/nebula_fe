@@ -6,11 +6,11 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 /* Component includes */
-var Assestment = require('../components/application/Assestment');
+var Survey = require('../components/application/Survey');
 
 var AssestmentContainer = React.createClass({
     render: function() {
-        return <Assestment
+        return <Survey
             header={this.props.route.header} />
     }
 });
