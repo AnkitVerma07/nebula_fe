@@ -335,22 +335,53 @@ var Fields = {
         }
     }),
     StarField: React.createClass({
-        componentDidMount: function() {
+        getInitialState(){
+            return {
+                selectedStar: undefined
+            }
+        },
+        /*componentDidMount: function() {
             var starContainer = document.getElementsByClassName('stars')[0];
             var stars = Array.prototype.slice.call(starContainer.children);
             var totalStars = stars.length;
-          starContainer.addEventListener('click', function(e) {
+          starContainer.addEventListener('click', (e) =>{
                 var index = stars.indexOf(e.target);
                 var count = count = totalStars - index;
                 for(var i = 0; i < stars.length; i++) {
                     stars[i].classList.remove('is-selected');
                 }
-                e.target.classList.add('is-selected');
-                alert(count);
-                console.log(this.props);
+                this.setState({
+                    isStartsSelected: true
+                })
+                //e.target.classList.add('is-selected');
+
+            this.props.changeFunc( count);
+            this.props.answerCallback(count, this.props.question);
             });
-          this.props.changeFunc( count);
-          this.props.answerCallback(count, this.props.question);
+
+        }, */
+
+        renderStar: function(value) {
+
+            let className = "star"
+            if (this.state.selectedStar == value) {
+              className += ' is-selected'
+            }
+
+            const onClick = () => {
+
+              this.setState({
+                selectedStar: value
+              });
+              this.props.changeFunc( value);
+              this.props.answerCallback(value, this.props.question);
+            }
+
+            return (<a key={value} onClick={onClick} className={className} preserveAspectRatio="xMinYMin" >
+                <svg preserveAspectRatio="xMinYMin">
+                    <use transform="scale(0.4)" xlinkHref="#star"></use>
+                </svg>
+            </a>)
         },
         render: function() {
             return (
@@ -365,31 +396,7 @@ var Fields = {
                             
                             <div className="starSet">
                                 <div className="stars">
-                                    <a className="star" preserveAspectRatio="xMinYMin">
-                                        <svg preserveAspectRatio="xMinYMin">
-                                            <use transform="scale(0.4)" xlinkHref="#star"></use>
-                                        </svg>
-                                    </a>
-                                    <a className="star" preserveAspectRatio="xMinYMin">
-                                        <svg preserveAspectRatio="xMinYMin">
-                                            <use transform="scale(0.4)" xlinkHref="#star"></use>
-                                        </svg>
-                                    </a>
-                                    <a className="star" preserveAspectRatio="xMinYMin">
-                                        <svg preserveAspectRatio="xMinYMin">
-                                            <use transform="scale(0.4)" xlinkHref="#star"></use>
-                                        </svg>
-                                    </a>
-                                    <a className="star" preserveAspectRatio="xMinYMin">
-                                        <svg preserveAspectRatio="xMinYMin">
-                                            <use transform="scale(0.4)" xlinkHref="#star"></use>
-                                        </svg>
-                                    </a>
-                                    <a className="star" preserveAspectRatio="xMinYMin">
-                                        <svg preserveAspectRatio="xMinYMin">
-                                            <use transform="scale(0.4)" xlinkHref="#star"></use>
-                                        </svg>
-                                    </a>
+                                  {[1,2,3,4,5].map((value) => this.renderStar(value))}
                                 </div>
                             </div>
                         </div>

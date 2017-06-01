@@ -119,15 +119,23 @@ var Survey = React.createClass({
                 </div>
                 <div className="content">
                     <div className="personal" ref="personal">
-                      {this.state.questions.map((question) => {
+                      {this.state.questions.map((question, index) => {
 
                         return (
                             <div className='questions' ref='questions'>
                               <div className={question.id} ref={question.id}>
-                            <Question ref={question.id} answerCallback={this.questionCallback} question={question} key={question.id} />
+                                <Question ref={question.id} answerCallback={this.questionCallback} question={question} key={question.id} />
                               </div>
                               <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
-                                $(question.id)[0].scrollIntoView({block: "start", behavior: "smooth"});
+                                const nextQuestionObject = this.state.questions[index + 1]
+                                if (nextQuestionObject) {
+
+                                  const nextQuestionRef = this.refs[nextQuestionObject.id]
+                                  if (nextQuestionRef){
+                                    nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                                  }
+                               // $(`${question.id}`)[0].scrollIntoView({block: "start", behavior: "smooth"});
+                              }
                               }} label="NEXT" />
                             </div>
 
