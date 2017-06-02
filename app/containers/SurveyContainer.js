@@ -8,11 +8,11 @@ var PropTypes = React.PropTypes;
 /* Component includes */
 var Survey = require('../components/application/Survey');
 
-var AssestmentContainer = React.createClass({
+var SurveyContainer = React.createClass({
     render: function() {
         return <Survey
             header={this.props.route.header} />
     }
 });
 
-module.exports = AssestmentContainer;
+module.exports = SurveyContainer;
