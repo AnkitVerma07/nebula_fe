@@ -52,7 +52,7 @@ var routes = (
 		<Route path="termsofuse" header="Terms Of Use" component={TermsOfUseContainer} />
 		<Route path="admin" header="Admin Page" component={AdminContainer} onEnter={requireAdminAuth} />
 		<Route path="login" component={LoginContainer} />
-		<Route path="graph" header="Graphs" component={GraphContainer} />
+		{/*<Route path="graph" header="Graphs" component={GraphContainer} />*/}
 		<Route path="resume" header="Resume" component={ResumeContainer} />
 		<Route path="cityinternships" header="City Internships Test" component={CityInternshipsContainer}>
 			<Route path="*" component={CityInternshipsContainer} />

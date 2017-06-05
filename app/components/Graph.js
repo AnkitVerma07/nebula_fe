@@ -31,7 +31,7 @@ var Notification = require('grommet/components/Notification');
 var Timestamp = require('grommet/components/Timestamp');
 var NumberInput = require('grommet/components/NumberInput');
 var Quote = require('grommet/components/Quote');
-var Sunburst = require('grommet/components/Sunburst');
+//var Sunburst = require('grommet/components/Sunburst');
 var Worldmap = require('grommet/components/Worldmap');
 
 /* ZingChart */
@@ -368,47 +368,47 @@ var CustomizeSunburst = React.createClass({
     render: function() {
         return (
             <div className={this.props.class} >
-                <Sunburst data={[
-                {
-                    "label": "root-1",
-                    "value": 70,
-                    "colorIndex": "neutral-1",
-                    "children": [
-                    {
-                        "label": "sub-1",
-                        "value": 20,
-                        "colorIndex": "neutral-1",
-                        "total": 10,
-                        "children": [
-                        {"label": "leaf-1", "value": 5, "colorIndex": "neutral-1"},
-                        {"label": "leaf-2", "value": 1, "colorIndex": "neutral-1"}
-                        ]
-                    },
-                    {"label": "sub-2", "value": 20, "colorIndex": "neutral-1"},
-                    {"label": "sub-3", "value": 30, "colorIndex": "neutral-1"}
-                    ]
-                },
-                {
-                    "label": "root-2",
-                    "value": 30,
-                    "colorIndex": "neutral-2",
-                    "children": [
-                    {"label": "sub-4", "value": 15, "colorIndex": "neutral-2"},
-                    {"label": "sub-5", "value": 10, "colorIndex": "neutral-1"},
-                    {"label": "sub-6", "value": 5, "colorIndex": "neutral-3"}
-                    ]
-                },
-                {
-                    "label": "root-3",
-                    "value": 20,
-                    "colorIndex": "neutral-3",
-                    "children": [
-                    {"label": "sub-7", "value": 10, "colorIndex": "neutral-1"},
-                    {"label": "sub-8", "value": 7, "colorIndex": "neutral-1"},
-                    {"label": "sub-9", "value": 3, "colorIndex": "neutral-3"}
-                    ]
-                }
-                ]} />
+                {/*<Sunburst data={[*/}
+                {/*{*/}
+                    {/*"label": "root-1",*/}
+                    {/*"value": 70,*/}
+                    {/*"colorIndex": "neutral-1",*/}
+                    {/*"children": [*/}
+                    {/*{*/}
+                        {/*"label": "sub-1",*/}
+                        {/*"value": 20,*/}
+                        {/*"colorIndex": "neutral-1",*/}
+                        {/*"total": 10,*/}
+                        {/*"children": [*/}
+                        {/*{"label": "leaf-1", "value": 5, "colorIndex": "neutral-1"},*/}
+                        {/*{"label": "leaf-2", "value": 1, "colorIndex": "neutral-1"}*/}
+                        {/*]*/}
+                    {/*},*/}
+                    {/*{"label": "sub-2", "value": 20, "colorIndex": "neutral-1"},*/}
+                    {/*{"label": "sub-3", "value": 30, "colorIndex": "neutral-1"}*/}
+                    {/*]*/}
+                {/*},*/}
+                {/*{*/}
+                    {/*"label": "root-2",*/}
+                    {/*"value": 30,*/}
+                    {/*"colorIndex": "neutral-2",*/}
+                    {/*"children": [*/}
+                    {/*{"label": "sub-4", "value": 15, "colorIndex": "neutral-2"},*/}
+                    {/*{"label": "sub-5", "value": 10, "colorIndex": "neutral-1"},*/}
+                    {/*{"label": "sub-6", "value": 5, "colorIndex": "neutral-3"}*/}
+                    {/*]*/}
+                {/*},*/}
+                {/*{*/}
+                    {/*"label": "root-3",*/}
+                    {/*"value": 20,*/}
+                    {/*"colorIndex": "neutral-3",*/}
+                    {/*"children": [*/}
+                    {/*{"label": "sub-7", "value": 10, "colorIndex": "neutral-1"},*/}
+                    {/*{"label": "sub-8", "value": 7, "colorIndex": "neutral-1"},*/}
+                    {/*{"label": "sub-9", "value": 3, "colorIndex": "neutral-3"}*/}
+                    {/*]*/}
+                {/*}*/}
+                {/*]} />*/}
                 <Legend series={[
                 {"label": "on target", "colorIndex": "neutral-1"},
                 {"label": "over", "colorIndex": "neutral-2"},
