@@ -11,7 +11,7 @@ var Survey = require('../components/application/Survey');
 var SurveyContainer = React.createClass({
     render: function() {
         return <Survey
-            header={this.props.route.header} />
+            header={this.props.route.header} params={this.props.params}/>
     }
 });
 

@@ -19,25 +19,44 @@ var Question = require('../../components/application/Question.js');
 
 var SelectField = require('../supportComponents/Fields.js').SelectField;
 
+var NebulaFooter = require('../../components/supportComponents/Footer.js');
+
+/* Grommet includes */
+require('grommet/grommet.min.css');
+var Grommet = require('grommet/components/Grommet');
+var Heading = require('grommet/components/Heading');
+var Label = require('grommet/components/Label');
+var Button = require('grommet/components/Button');
+var LinkNext = require('grommet/components/icons/base/LinkNext');
+var Form = require('grommet/components/Form');
+var FormField = require('grommet/components/FormField');
+var SearchInput = require('grommet/components/SearchInput');
+var Tabs = require('grommet/components/Tabs');
+var Tab = require('grommet/components/Tab');
+var Sidebar = require('grommet/components/Sidebar');
+var Anchor = require('grommet/components/Anchor');
+var Menu = require('grommet/components/Menu');
+var Calendar = require('grommet/components/Calendar');
+var RadioButton = require('grommet/components/RadioButton');
+
+
 /* SASS includes */
-require('../../styles/application.scss');
+require('../../styles/survey.scss');
 
 
 var Survey = React.createClass({
     componentDidMount: function() {
-
-        localStorage.setItem('survey_id', 1);
+     // document.body.style.overflow = "hidden";
         $.ajax({
             type: 'GET',
             dataType: "json",
             crossDomain: true,
-            url: 'http://localhost:9090/nebulaben/benapi/surveyInfo/getSurvey/' + localStorage.getItem('survey_id'),
+            url: 'http://localhost:9090/nebulaben/benapi/surveyInfo/getSurvey/' + this.props.params.surveyId,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             success: (response) => {
-                console.log();
                 this.setState({
                     survey: response,
                     questions: response.questionList
@@ -54,13 +73,38 @@ var Survey = React.createClass({
         return {
             questions: [],
           test_taken_data: [],
-            score: 0
+            score: 0,
+            survey: {
+                title: null,
+                source: null
+            }
         }
     },
 
-    submitAssesment: function(e) {
-      console.log('state', this.state);
+    renderSubmitButton: function() {
+        return (
+                <Button id="personalButton" fill={true} plain={true} onClick={() => {
+                    this.submitAssesment();
+                    this.goToResultPage();
+                }}>SUBMIT</Button>
+        );
+    },
 
+    renderNextButton: function(index) {
+        return (
+            <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
+                const nextQuestionObject = this.state.questions[index + 1];
+                if (nextQuestionObject) {
+                    const nextQuestionRef = this.refs[nextQuestionObject.id];
+                    if (nextQuestionRef){
+                        nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                    }
+                }
+            }} label="NEXT" />
+        );
+    },
+
+    submitAssesment: function(e) {
         let userData = {
             answersList: this.state.test_taken_data
         };
@@ -84,6 +128,11 @@ var Survey = React.createClass({
         //         alert('Sorry, there was a problem!');
         //     },
         // });
+    },
+
+    goToResultPage: function() {
+        ReactRouter.browserHistory.push("/#/results");
+        window.location.reload();
     },
 
   questionCallback: function(value, question) {
@@ -113,61 +162,71 @@ var Survey = React.createClass({
 
     render: function() {
         return (
-            <div id="settingsTab" className="main">
+            <div className="survey">
+                <Grommet>
+                    <header>
+                        <a href="http://localhost:8080/#/login">
+                            <img src="/app/styles/logos/nebulaLogoWhite.png" />
+                        </a>
+                    </header>
+                    <div className="question-tabs">
+            <div id="question-tag" className="main">
                 <div className="title">
-
+                    <header>
+                        <Heading tag="h2" uppercase={true}>
+                            {this.props.header}
+                        </Heading>
+                    </header>
                 </div>
                 <div className="content">
+
+                    <div className="personal" ref="personal">
+                        <div className='questions' ref='questions'>
+                        <h>
+                            {this.state.survey.title}
+                        </h>
+                        <p className="intro-para">
+                            Our mission is to unite the most talented people with the most rewarding opportunities. Your experience is very important to us, and we would love to learn more about it as you work with us.
+                        </p>
+                        <p className="intro-para">
+                            Please invest five minutes to share your impression of the company you may be interviewing with. The information will be used to guide our efforts in accomplishing our mission only and your individual responses will not be shared with the organization.
+                        </p>
+                        <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
+                            const nextQuestionObject = this.state.questions[0];
+                            if (nextQuestionObject) {
+                                const nextQuestionRef = this.refs[nextQuestionObject.id];
+                                if (nextQuestionRef){
+                                    nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                                }
+                            }
+                        }} label="NEXT" />
+                        </div>
+                    </div>
+
                     <div className="personal" ref="personal">
                       {this.state.questions.map((question, index) => {
+
 
                         return (
                             <div className='questions' ref='questions'>
                               <div className={question.id} ref={question.id}>
-                                <Question ref={question.id} answerCallback={this.questionCallback} question={question} key={question.id} />
+                                <Question ref={question.id} answerCallback={this.questionCallback} question={question} key={parseInt(question.id)} />
                               </div>
-                              <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
-                                const nextQuestionObject = this.state.questions[index + 1]
-                                if (nextQuestionObject) {
-
-                                  const nextQuestionRef = this.refs[nextQuestionObject.id]
-                                  if (nextQuestionRef){
-                                    nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
-                                  }
-                               // $(`${question.id}`)[0].scrollIntoView({block: "start", behavior: "smooth"});
-                              }
-                              }} label="NEXT" />
+                                { (index == this.state.questions.length-1) ? this.renderSubmitButton() : this.renderNextButton(index) }
                             </div>
-
                         )
                       })}
-
-                    </div>
-
-                    <div className="address" ref="address">
-                        <FormField className='address1'>
-                            <input type="text"  placeholder='Address 1' id='address1' ref='address1' onMouseOut={this.valueChange} />
-                        </FormField>
-                        <FormField className='address2'>
-                            <input type="text"  placeholder='Address 2' id='address2' ref='address2' onMouseOut={this.valueChange} />
-                        </FormField>
-                        <FormField className='city'>
-                            <input type="text"  placeholder='City' id='city' ref='city' onMouseOut={this.valueChange} />
-                        </FormField>
-                        <SelectField className="state" fieldName="State" fieldID="currentState" changeFunc={this.valueChange} states={this.props.stateOptions} stateFunc={this.makeStateOption} />
-                        <SelectField fieldName="Country" fieldID="currentCountry" changeFunc={this.valueChange} states={this.props.stateOptions} stateFunc={this.makeStateOption} />
-                        <FormField className='zipcode'>
-                            <input type="text"  placeholder='Zipcode' id='zipcode' ref='zipcode' onMouseOut={this.valueChange} />
-                        </FormField>
-                        <Button id="personalButton" fill={true} plain={true} onClick={this.submitAssesment}>SUBMIT</Button>
-                    </div>
-
-                    <div className="filler">
                     </div>
                 </div>
                 <div className="filler">
                 </div>
             </div>
+                    <NebulaFooter />
+                    </div>
+        </Grommet>
+
+
+        </div>
         )
     }
 });

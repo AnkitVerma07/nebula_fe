@@ -25,6 +25,7 @@ var GraphContainer = require('../containers/GraphContainer');
 var CityInternshipsContainer = require('../containers/CityInternshipsContainer');
 var ResumeContainer = require('../containers/ResumeContainer');
 var SurveyContainer = require('../containers/SurveyContainer');
+var ResultContainer = require('../containers/ResultContainer');
 /* Ajax URL includes */
 var statesUrl = "http://ben.nebula.careers:8080/ben/nebula_fe/data/states.json";
 var universityUrl = "http://ben.nebula.careers:8080/ben/nebula_fe/data/universities.json";
@@ -41,7 +42,8 @@ var routes = (
 			universityUrl={universityUrl} 
 			component={ApplicationContainer}
 		/>
-		<Route path="survey" header="Survey" component={SurveyContainer} />
+		<Route path="survey/:surveyId" header="Fill Out The Survey Below:" component={SurveyContainer} />
+		<Route path="results" header="Your Results:" component={ResultContainer} />
 		<Route path="aboutus" header="About Us" component={AboutUsContainer} />
 		<Route path="contactus" header="Contact Us" component={ContactUsContainer} />
 		<Route path="privacypolicy" header="Privacy Policy" component={PrivacyPolicyContainer} />

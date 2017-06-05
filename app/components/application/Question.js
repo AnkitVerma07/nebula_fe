@@ -33,14 +33,43 @@ function InputFieldChoice(props) {
       <input type="text"  placeholder='Your Value' id={props.question.id}  onMouseOut={(value) => {
         props.inputChange(value);
       }} />
-      <p>Clicking outside the text field will submit your response.*</p>
     </FormField>
   );
 }
 
 function NPSChoice(props) {
   return (
-    <div className={props.question.question} >
+    <div className={props.question.id} >
+        <input type="button" className="button-nps" value="not likely 1" onClick={() => {
+            props.answerCallback(1, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="2" onClick={() => {
+            props.answerCallback(2, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="3" onClick={() => {
+            props.answerCallback(3, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="4" onClick={() => {
+            props.answerCallback(4, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="5" onClick={() => {
+            props.answerCallback(5, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="6" onClick={() => {
+            props.answerCallback(6, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="7" onClick={() => {
+            props.answerCallback(7, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="8" onClick={() => {
+            props.answerCallback(8, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="9" onClick={() => {
+            props.answerCallback(9, props.question);
+        }}/>
+        <input type="button" className="button-nps" value="10 most likely" onClick={() => {
+            props.answerCallback(10, props.question);
+        }}/>
     </div>
   );
 }
@@ -98,6 +127,27 @@ function SelectChoice(props) {
   );
 }
 
+function DropDownWInput(props){
+return (
+    <div>
+        <Select
+            name="form-field-name"
+            value={props.val}
+            options={props.options}
+            onChange={(value) => {
+                props.logChange(value);
+                props.answerCallback(value.value, props.question);
+            }}
+        />
+        <FormField className={props.question.question}>
+            <input type="text"  placeholder='other..' id={props.question.id}  onMouseOut={(value) => {
+                props.inputChange(value);
+            }} />
+        </FormField>
+    </div>
+)
+}
+
 function MultiSelectChoice(props) {
   return (
     <Select
@@ -126,8 +176,11 @@ function Choices(props) {
       return <MultiSelectChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange}/>;
     } else if(type === 'NPS') {
       return <NPSChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange}/>;
-    } else if(type === 'input') {
+    } else if(type === 'text') {
       return <InputFieldChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} inputChange={props.inputChange}/>;
+    }
+    else if(type === 'dropdownWInput') {
+        return <DropDownWInput question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange} inputChange={props.inputChange}/>;
     }
 }
 
@@ -181,7 +234,7 @@ var Question = React.createClass({
               <Label className="question_text">
                 {this.props.question.question}
               </Label>
-                <Choices question={this.props.question} answerCallback={this.props.answerCallback}  options={this.state.options} val={this.state.val} logChange={this.logChange} radiologChange={this.radiologChange} inputChange={this.inputChange} npsChange={this.npsChange}/>
+                <Choices className="question-choices" question={this.props.question} answerCallback={this.props.answerCallback}  options={this.state.options} val={this.state.val} logChange={this.logChange} radiologChange={this.radiologChange} inputChange={this.inputChange} npsChange={this.npsChange}/>
             </div>
     )
   }

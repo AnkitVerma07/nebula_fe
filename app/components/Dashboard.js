@@ -18,6 +18,9 @@ var loggedIn = require('../config/auth/AuthService.js').loggedIn;
 var getToken = require('../config/auth/AuthService.js').getToken;
 
 var Dashboard = React.createClass({
+    contextTypes: {
+        router: React.PropTypes.object.isRequired
+    },
     clickedResumeButton: function() {
         this.refs.resumeButton.click();
     },
@@ -75,16 +78,17 @@ var Dashboard = React.createClass({
         window.location.reload();
     },
 
-    goToAssestmentTest: function(e) {
+    goToSurveyTest: function(e) {
         e.preventDefault();
-        ReactRouter.browserHistory.push("/#/assestment");
+        ReactRouter.browserHistory.push("/#/survey/" + 1);
         window.location.reload();
     },
     render: function() {
         var profile = getProfile;
-        if(localStorage.getItem('signup') == "true") {
-            this.sendSignupToBen();
-        }
+        console.log(localStorage);
+        // if(localStorage.getItem('signup') == "true") {
+        //     this.sendSignupToBen();
+        // }
         return (
             <div className="dashboard">
                 <Grommet>
@@ -106,7 +110,7 @@ var Dashboard = React.createClass({
                                 <Button onClick={this.goToApplication}>Go to Application</Button>
                             </div>
                             <div>
-                                <Button onClick={this.goToAssestmentTest}>Take an Assestment</Button>
+                                <Button onClick={this.goToSurveyTest}>Take a Survey</Button>
                             </div>
                             <div>
                                 <Button onClick={logout}>Log Out</Button>

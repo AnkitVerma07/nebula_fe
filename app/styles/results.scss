@@ -1,0 +1,21 @@
+$headerPadding: 2em;
+
+#results {
+  background-color: aliceblue;
+  width: 100vw;
+  height: 100vh;
+
+  text-align: center;
+  width: 100%;
+
+  h {
+    font-weight: 100;
+    font-size: 30px;
+    padding: $headerPadding;
+  }
+
+  header {
+    font-weight: 100;
+    padding: $headerPadding;
+  }
+}
