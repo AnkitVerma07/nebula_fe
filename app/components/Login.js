@@ -13,7 +13,7 @@ var Tab = require('grommet/components/Tab');
 var Form = require('grommet/components/Form');
 var FormField = require('grommet/components/FormField');
 var Mail = require('grommet/components/icons/base/Mail');
-var Checkbox = require('grommet/components/Checkbox');
+//var Checkbox = require('grommet/components/Checkbox');
 var SocialFacebook = require('grommet/components/icons/base/SocialFacebook');
 var SocialGoogle = require('grommet/components/icons/base/SocialGoogle');
 var SocialWindows = require('grommet/components/icons/base/PlatformWindows');
@@ -330,7 +330,7 @@ var Login = React.createClass({
                                             <FormField className='password'>
                                                 <input type="text"  placeholder='Password' id='password' ref='signup_password'  />
                                             </FormField>
-                                            <Checkbox onChange={this.agreedTerms} />
+                                            {/*<Checkbox onChange={this.agreedTerms} />*/}
                                             <Paragraph id="agreement">
                                                 I agree to the <a target="_blank" href="#/termsofuse">terms of use</a> and <a href="#/privacypolicy" target="_blank">privacy policy</a>
                                             </Paragraph>
