@@ -46,12 +46,12 @@ require('../../styles/survey.scss');
 
 var Survey = React.createClass({
     componentDidMount: function() {
-     // document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
         $.ajax({
             type: 'GET',
             dataType: "json",
             crossDomain: true,
-            url: 'http://localhost:9090/nebulaben/benapi/surveyInfo/getSurvey/' + this.props.params.surveyId,
+            url: 'http://104.197.97.67:8080/benapi/surveyInfo/getSurvey/' + this.props.params.surveyId,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ var Survey = React.createClass({
 
             },
             error : (xhr, status) => {
-                alert('Sorry, there was a problem!');
+               // alert('Sorry, there was a problem!');
             },
         });
 
@@ -104,36 +104,37 @@ var Survey = React.createClass({
         );
     },
 
-    submitAssesment: function(e) {
+    submitAssesment: function() {
         let userData = {
             answersList: this.state.test_taken_data
         };
 
         var D = JSON.stringify(userData);
         console.log(D);
-        // $.ajax({
-        //     type: 'POST',
-        //     dataType: "application/json",
-        //     crossDomain: true,
-        //     url: 'http://localhost:9090/nebulaben/benapi/surveyInfo/'+ localStorage.getItem('user_id') + '/surveyTaken/' + localStorage.getItem('survey_id'),
-        //     data: D,
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     success: (response) => {
-        //         console.log(response);
-        //     },
-        //     error : (xhr, status) => {
-        //         alert('Sorry, there was a problem!');
-        //     },
-        // });
+        $.ajax({
+            type: 'POST',
+            dataType: "application/json",
+            crossDomain: true,
+            url: 'http://104.197.97.67:8080/benapi/surveyInfo/'+ 1 + '/surveyTaken/' + this.props.params.surveyId,
+            data: D,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            success: (response) => {
+                console.log(response);
+            },
+            error : (xhr, status) => {
+           //     alert('Sorry, there was a problem!');
+            },
+        });
     },
 
     goToResultPage: function() {
         ReactRouter.browserHistory.push("/#/results");
         window.location.reload();
     },
+
 
   questionCallback: function(value, question) {
 
@@ -202,6 +203,7 @@ var Survey = React.createClass({
                         }} label="NEXT" />
                         </div>
                     </div>
+
 
                     <div className="personal" ref="personal">
                       {this.state.questions.map((question, index) => {
