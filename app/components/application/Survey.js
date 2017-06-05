@@ -46,7 +46,7 @@ require('../../styles/survey.scss');
 
 var Survey = React.createClass({
     componentDidMount: function() {
-    document.body.style.overflow = "hidden";
+   document.body.style.overflow = "hidden";
         $.ajax({
             type: 'GET',
             dataType: "json",
@@ -85,7 +85,7 @@ var Survey = React.createClass({
         return (
                 <Button id="personalButton" fill={true} plain={true} onClick={() => {
                     this.submitAssesment();
-                    this.goToResultPage();
+
                 }}>SUBMIT</Button>
         );
     },
@@ -110,7 +110,7 @@ var Survey = React.createClass({
         };
 
         var D = JSON.stringify(userData);
-        console.log(D);
+        //console.log(D);
         $.ajax({
             type: 'POST',
             dataType: "application/json",
@@ -122,12 +122,16 @@ var Survey = React.createClass({
                 'Content-Type': 'application/json'
             },
             success: (response) => {
-                console.log(response);
+               // console.log(response);
+              this.goToResultPage();
             },
             error : (xhr, status) => {
            //     alert('Sorry, there was a problem!');
+              this.goToResultPage();
             },
         });
+
+
     },
 
     goToResultPage: function() {
