@@ -7,32 +7,32 @@ var Heading = require('grommet/components/Heading');
 var Button = require('grommet/components/Button');
 
 /* Chart includes */
-var Chart = require('grommet/components/Chart');
-var MarkerLabel = require('grommet/components/chart/MarkerLabel');
-var Base = require('grommet/components/chart/Base');
-var Layers = require('grommet/components/chart/Layers');
-var Grid = require('grommet/components/chart/Grid');
-var Marker = require('grommet/components/chart/Marker');
-var Bar = require('grommet/components/chart/Bar');
-var HotSpots = require('grommet/components/chart/HotSpots');
-var Graph = require('grommet/components/chart/Graph');
-var Value = require('grommet/components/Value');
-var Axis = require('grommet/components/chart/Axis');
-var Line = require('grommet/components/chart/Line');
-var Meter = require('grommet/components/Meter');
-var Area = require('grommet/components/chart/Area');
-var Distribution = require('grommet/components/Distribution');
-var Legend = require('grommet/components/Legend');
-var Map = require('grommet/components/Map');
-var Menu = require('grommet/components/Menu');
-var Anchor = require('grommet/components/Anchor');
-var Meter = require('grommet/components/Meter');
-var Notification = require('grommet/components/Notification');
-var Timestamp = require('grommet/components/Timestamp');
-var NumberInput = require('grommet/components/NumberInput');
-var Quote = require('grommet/components/Quote');
-//var Sunburst = require('grommet/components/Sunburst');
-var Worldmap = require('grommet/components/Worldmap');
+// var Chart = require('grommet/components/Chart');
+// var MarkerLabel = require('grommet/components/chart/MarkerLabel');
+// var Base = require('grommet/components/chart/Base');
+// var Layers = require('grommet/components/chart/Layers');
+// var Grid = require('grommet/components/chart/Grid');
+// var Marker = require('grommet/components/chart/Marker');
+// var Bar = require('grommet/components/chart/Bar');
+// var HotSpots = require('grommet/components/chart/HotSpots');
+// var Graph = require('grommet/components/chart/Graph');
+// var Value = require('grommet/components/Value');
+// var Axis = require('grommet/components/chart/Axis');
+// var Line = require('grommet/components/chart/Line');
+// var Meter = require('grommet/components/Meter');
+// var Area = require('grommet/components/chart/Area');
+// var Distribution = require('grommet/components/Distribution');
+// var Legend = require('grommet/components/Legend');
+// var Map = require('grommet/components/Map');
+// var Menu = require('grommet/components/Menu');
+// var Anchor = require('grommet/components/Anchor');
+// var Meter = require('grommet/components/Meter');
+// var Notification = require('grommet/components/Notification');
+// var Timestamp = require('grommet/components/Timestamp');
+// var NumberInput = require('grommet/components/NumberInput');
+// var Quote = require('grommet/components/Quote');
+// //var Sunburst = require('grommet/components/Sunburst');
+// var Worldmap = require('grommet/components/Worldmap');
 
 /* ZingChart */
 require('zingchart/client/zingchart.min.js');
@@ -476,45 +476,45 @@ var Graph = React.createClass({
     render: function() {
         return (
             <div className="graph">
-                <Grommet>
-                    <header>
-                        <Heading tag="h2" uppercase={true}>
-                            {this.props.header}
-                        </Heading>
-                    </header>
-                    <div className="content">
-                        <NormalCurve class="normal" viewBox="0 0 100 50" />
-                        <CustomizeChart class="line" smooth={false} type="line" />
-                        <CustomizeChart class="line" smooth={true} type="line" />
-                        <CustomizeChart class="area" smooth={false} type="area" />
-                        <CustomizeChart class="area" smooth={true} type="area" />
-                        <CustomizeChart class="bar" smooth={false} type="bar" />
-                        <CustomizeDistribution class="distribution" vertical={true} />
-                        <CustomizeMap class="map" />
-                        <CustomizeMenu class="menu" />
-                        <CustomizeMeter class="meter" />
-                        <CustomizeNotification class="notification" />
-                        <CustomizeNumberInput class="numberInput" value={42} changeFunc={this.closedNotification} />
-                        <CustomizeQuote class="quote" credit="E.E. Cummings" quoteText="To be nobody but yourself in a world which is doing its best, night and day, to make you everybody else means to fight the hardest battle which any human being can fight; and never stop fighting." />
-                        <CustomizeSunburst class="sunburst" />
-                        <CustomizeWorldmap class="worldmap" />
-                        <ZingChart height="400" width="500" class="zingchart" data='{ "values": [15, 15, 15, 15, 15]}, { "values": [25, 18, 20, 15, 23]}'
-                        id1="zingchartRadar"  type1="radar" aspect1="line" 
-                        id2="zingchartPolar" type2="radar" aspect2="area" 
-                        id3="zingchartFunnel" type3="funnel" aspect3="area" 
-                        id4="zingchartArea" type4="area" aspect4="area"
-                        id5="zingchartArea3d" type5="area3d" aspect5="area"
-                        id6="zingchartStepped" type6="area" aspect6="stepped"
-                        id7="zingchartStacked" type7="area" aspect7="area"
-                        id8="zingchartGradient" type8="area" 
-                        id9="zingchartBar" type9="bar"
-                        id10="zingchartBar3D" type10="bar3d"
-                        id11="zingchartBar3DCylinder" type11="bar3d" aspect11="cylinder"
-                        id12="zingchartBarStacked" type12="bar" 
-                        id13="zingchartBubble" type13="bubble"
-                        />
-                    </div>
-                </Grommet>
+                {/*<Grommet>*/}
+                    {/*<header>*/}
+                        {/*<Heading tag="h2" uppercase={true}>*/}
+                            {/*{this.props.header}*/}
+                        {/*</Heading>*/}
+                    {/*</header>*/}
+                    {/*<div className="content">*/}
+                        {/*<NormalCurve class="normal" viewBox="0 0 100 50" />*/}
+                        {/*<CustomizeChart class="line" smooth={false} type="line" />*/}
+                        {/*<CustomizeChart class="line" smooth={true} type="line" />*/}
+                        {/*<CustomizeChart class="area" smooth={false} type="area" />*/}
+                        {/*<CustomizeChart class="area" smooth={true} type="area" />*/}
+                        {/*<CustomizeChart class="bar" smooth={false} type="bar" />*/}
+                        {/*<CustomizeDistribution class="distribution" vertical={true} />*/}
+                        {/*<CustomizeMap class="map" />*/}
+                        {/*<CustomizeMenu class="menu" />*/}
+                        {/*<CustomizeMeter class="meter" />*/}
+                        {/*<CustomizeNotification class="notification" />*/}
+                        {/*<CustomizeNumberInput class="numberInput" value={42} changeFunc={this.closedNotification} />*/}
+                        {/*<CustomizeQuote class="quote" credit="E.E. Cummings" quoteText="To be nobody but yourself in a world which is doing its best, night and day, to make you everybody else means to fight the hardest battle which any human being can fight; and never stop fighting." />*/}
+                        {/*<CustomizeSunburst class="sunburst" />*/}
+                        {/*<CustomizeWorldmap class="worldmap" />*/}
+                        {/*<ZingChart height="400" width="500" class="zingchart" data='{ "values": [15, 15, 15, 15, 15]}, { "values": [25, 18, 20, 15, 23]}'*/}
+                        {/*id1="zingchartRadar"  type1="radar" aspect1="line" */}
+                        {/*id2="zingchartPolar" type2="radar" aspect2="area" */}
+                        {/*id3="zingchartFunnel" type3="funnel" aspect3="area" */}
+                        {/*id4="zingchartArea" type4="area" aspect4="area"*/}
+                        {/*id5="zingchartArea3d" type5="area3d" aspect5="area"*/}
+                        {/*id6="zingchartStepped" type6="area" aspect6="stepped"*/}
+                        {/*id7="zingchartStacked" type7="area" aspect7="area"*/}
+                        {/*id8="zingchartGradient" type8="area" */}
+                        {/*id9="zingchartBar" type9="bar"*/}
+                        {/*id10="zingchartBar3D" type10="bar3d"*/}
+                        {/*id11="zingchartBar3DCylinder" type11="bar3d" aspect11="cylinder"*/}
+                        {/*id12="zingchartBarStacked" type12="bar" */}
+                        {/*id13="zingchartBubble" type13="bubble"*/}
+                        {/*/>*/}
+                    {/*</div>*/}
+                {/*</Grommet>*/}
             </div>
         );
     }
