@@ -40,7 +40,7 @@ function InputFieldChoice(props) {
 function NPSChoice(props) {
   return (
     <div className={props.question.id} >
-        <input type="button" className="button-nps" value="not likely 1" onClick={() => {
+        <input type="button" className="button-nps" value="Very Unlikely | 1" onClick={() => {
             props.answerCallback(1, props.question);
         }}/>
         <input type="button" className="button-nps" value="2" onClick={() => {
@@ -67,7 +67,7 @@ function NPSChoice(props) {
         <input type="button" className="button-nps" value="9" onClick={() => {
             props.answerCallback(9, props.question);
         }}/>
-        <input type="button" className="button-nps" value="10 most likely" onClick={() => {
+        <input type="button" className="button-nps" value="10 | Very Likely" onClick={() => {
             props.answerCallback(10, props.question);
         }}/>
     </div>

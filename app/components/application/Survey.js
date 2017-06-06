@@ -46,12 +46,12 @@ require('../../styles/survey.scss');
 
 var Survey = React.createClass({
     componentDidMount: function() {
-   document.body.style.overflow = "hidden";
+   //document.body.style.overflow = "hidden";
         $.ajax({
             type: 'GET',
             dataType: "json",
             crossDomain: true,
-            url: 'http://104.197.97.67:8080/benapi/surveyInfo/getSurvey/' + this.props.params.surveyId,
+            url: 'http://localhost:9090/nebulaben/benapi/surveyInfo/getSurvey/' + this.props.params.surveyId,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
