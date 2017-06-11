@@ -54,7 +54,7 @@ var Survey = React.createClass({
             type: 'GET',
             dataType: "json",
             crossDomain: true,
-            url: 'http://10.128.0.4/benapi/surveys/' + this.props.params.surveyId,
+            url: 'http://35.184.252.96/benapi/surveys/' + this.props.params.surveyId,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ var Survey = React.createClass({
             type: 'POST',
             dataType: "application/json",
             crossDomain: true,
-            url: 'http://10.128.0.4/benapi/surveys/'+ 1 + 'surveyTaken' + + this.props.params.surveyId,
+            url: 'http://35.184.252.96/benapi/surveys/'+ 1 + 'surveyTaken' + + this.props.params.surveyId,
             data: D,
             headers: {
                 'Accept': 'application/json',
