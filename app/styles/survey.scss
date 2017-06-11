@@ -265,7 +265,10 @@ $mobileSocialMediaWidth: 30%;
                 min-width:20px;
               }
 
-
+              .radio-button {
+                margin:10px;
+                float:left;/*Add float left*/
+              }
 
               p {
                 font-size: 10px;
@@ -283,7 +286,6 @@ $mobileSocialMediaWidth: 30%;
 
             button {
               width: 100%;
-              position: absolute;
               bottom: 280px;
             }
 

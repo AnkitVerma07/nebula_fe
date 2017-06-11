@@ -16,7 +16,6 @@ var FormField = require('grommet/components/FormField');
 //var CheckBox = require('grommet/components/CheckBox');
 var NumberInput = require('grommet/components/NumberInput');
 
-
 var Select = require('react-select');
 require('react-select/dist/react-select.css');
 
@@ -97,41 +96,43 @@ function DropDownChoice(props) {
 
 function SelectChoice(props) {
   return (
-    <Menu>
 
-    <RadioButton id={props.question.id + '-1'} label="Strongly Agree" onChange={() => {
+        <div>
+    <RadioButton className="radio-button" id={props.question.id + '-1'} label="Strongly Agree" onChange={() => {
       props.radiologChange('Strongly Agree', props.question.id + '-1', props.question.id);
       props.answerCallback('Strongly Agree', props.question);
     }}/>
 
-    <RadioButton id={props.question.id + '-2'} label="Agree" onChange={() => {
+    <RadioButton className="radio-button" id={props.question.id + '-2'} label="Agree" onChange={() => {
     props.radiologChange('Agree', props.question.id + '-2', props.question.id);
     props.answerCallback('Agree', props.question);
     }}/>
 
-      <RadioButton id={props.question.id + '-3'} label="Neither agree nor disagree" onChange={() => {
+      <RadioButton className="radio-button" id={props.question.id + '-3'} label="Neither agree nor disagree" onChange={() => {
         props.radiologChange('Neither agree nor disagree', props.question.id + '-3', props.question.id);
         props.answerCallback('Neither agree nor disagree', props.question);
       }}/>
-      <RadioButton id={props.question.id + '-4'} label="Disagree" onChange={() => {
+      <RadioButton className="radio-button" id={props.question.id + '-4'} label="Disagree" onChange={() => {
         props.radiologChange('Disagree', props.question.id + '-4', props.question.id);
         props.answerCallback('Disagree', props.question);
       }}/>
 
-      <RadioButton id={props.question.id + '-5'} label="Strongly Disagree" onChange={() => {
+      <RadioButton className="radio-button" id={props.question.id + '-5'} label="Strongly Disagree" onChange={() => {
         props.radiologChange('Strongly Disagree', props.question.id + '-5', props.question.id);
         props.answerCallback('Strongly Disagree', props.question);
       }}/>
 
-    </Menu>
+        </div>
   );
 }
 
 function DropDownWInput(props){
 return (
     <div>
+         <div>
         <Select
-            name="form-field-name"
+            simpleValue
+            placeholder="pick one..."
             value={props.val}
             options={props.options}
             onChange={(value) => {
@@ -139,11 +140,12 @@ return (
                 props.answerCallback(value.value, props.question);
             }}
         />
+         </div>
+        <div>
         <FormField className={props.question.question}>
-            <input type="text"  placeholder='other..' id={props.question.id}  onMouseOut={(value) => {
-                props.inputChange(value);
-            }} />
+            <input type="text"  placeholder='other..' id={props.question.id}  readOnly={props.isEditing ? "" : "readOnly"} onMouseOut={props.inputChange}/>
         </FormField>
+        </div>
     </div>
 )
 }
@@ -180,7 +182,9 @@ function Choices(props) {
       return <InputFieldChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} inputChange={props.inputChange}/>;
     }
     else if(type === 'dropdownWInput') {
-        return <DropDownWInput question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange} inputChange={props.inputChange}/>;
+        return <DropDownWInput question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange} inputChange={props.inputChange} isEditing={props.isEditing}/>;
+    } else if( type === 'N/A'){
+        return <div></div>
     }
 }
 
@@ -203,9 +207,23 @@ var Question = React.createClass({
   },
   getInitialState: function() {
     return {
+        isEditing: '',
+        options: [],
+        val: ''
     }
   },
   logChange: function(val) {
+      if(val === 'other'){
+          this.setState({
+              isEditing: 'readOnly'
+          });
+      }else{
+          this.setState({
+              isEditing: ''
+          });
+      }
+
+
     this.setState({ val });
   },
   radiologChange: function(val, id, questionId) {
@@ -218,7 +236,6 @@ var Question = React.createClass({
     this.setState({ val });
   },
   inputChange: function(e) {
-    var key = e.target.id;
     var val = e.target.value;
     this.setState({ val });
     this.props.answerCallback(val, this.props.question);
@@ -229,12 +246,12 @@ var Question = React.createClass({
     return (
             <div  className="question" ref="question">
               <p>
-                {this.props.question.id}
+                {this.props.question.order}
               </p>
               <Label className="question_text">
                 {this.props.question.question}
               </Label>
-                <Choices className="question-choices" question={this.props.question} answerCallback={this.props.answerCallback}  options={this.state.options} val={this.state.val} logChange={this.logChange} radiologChange={this.radiologChange} inputChange={this.inputChange} npsChange={this.npsChange}/>
+                <Choices className="question-choices" question={this.props.question} answerCallback={this.props.answerCallback}  options={this.state.options} val={this.state.val} logChange={this.logChange} radiologChange={this.radiologChange} inputChange={this.inputChange} isEditing ={this.state.isEditing} npsChange={this.npsChange}/>
             </div>
     )
   }

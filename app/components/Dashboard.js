@@ -78,11 +78,11 @@ var Dashboard = React.createClass({
         window.location.reload();
     },
 
-    goToSurveyTest: function(e) {
-        e.preventDefault();
-        ReactRouter.browserHistory.push("/#/survey/" + 1);
-        window.location.reload();
-    },
+    // goToSurveyTest: function(e) {
+    //     e.preventDefault();
+    //     ReactRouter.browserHistory.push("/#/survey/" + 'ad6d981e-6256-4740-b144-99aed0c67a5b');
+    //     window.location.reload();
+    // },
     render: function() {
         var profile = getProfile;
         console.log(localStorage);
@@ -109,9 +109,9 @@ var Dashboard = React.createClass({
                             <div>
                                 <Button onClick={this.goToApplication}>Go to Application</Button>
                             </div>
-                            <div>
-                                <Button onClick={this.goToSurveyTest}>Take a Survey</Button>
-                            </div>
+                            {/*<div>*/}
+                                {/*<Button onClick={this.goToSurveyTest}>Take a Survey</Button>*/}
+                            {/*</div>*/}
                             <div>
                                 <Button onClick={logout}>Log Out</Button>
                             </div>
