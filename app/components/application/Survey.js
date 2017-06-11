@@ -122,6 +122,7 @@ var Survey = React.createClass({
         };
 
         var D = JSON.stringify(userData);
+        console.log(D);
         $.ajax({
             type: 'POST',
             dataType: "json",
