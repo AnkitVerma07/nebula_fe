@@ -40,34 +40,34 @@ function NPSChoice(props) {
   return (
     <div className={props.question.id} >
         <input type="button" className="button-nps" value="Very Unlikely | 1" onClick={() => {
-            props.answerCallback(1, props.question);
+            props.answerCallback('1', props.question);
         }}/>
         <input type="button" className="button-nps" value="2" onClick={() => {
-            props.answerCallback(2, props.question);
+            props.answerCallback('2', props.question);
         }}/>
         <input type="button" className="button-nps" value="3" onClick={() => {
-            props.answerCallback(3, props.question);
+            props.answerCallback('3', props.question);
         }}/>
         <input type="button" className="button-nps" value="4" onClick={() => {
-            props.answerCallback(4, props.question);
+            props.answerCallback('4', props.question);
         }}/>
         <input type="button" className="button-nps" value="5" onClick={() => {
-            props.answerCallback(5, props.question);
+            props.answerCallback('5', props.question);
         }}/>
         <input type="button" className="button-nps" value="6" onClick={() => {
-            props.answerCallback(6, props.question);
+            props.answerCallback('6', props.question);
         }}/>
         <input type="button" className="button-nps" value="7" onClick={() => {
-            props.answerCallback(7, props.question);
+            props.answerCallback('7', props.question);
         }}/>
         <input type="button" className="button-nps" value="8" onClick={() => {
-            props.answerCallback(8, props.question);
+            props.answerCallback('8', props.question);
         }}/>
         <input type="button" className="button-nps" value="9" onClick={() => {
-            props.answerCallback(9, props.question);
+            props.answerCallback('9', props.question);
         }}/>
         <input type="button" className="button-nps" value="10 | Very Likely" onClick={() => {
-            props.answerCallback(10, props.question);
+            props.answerCallback('10', props.question);
         }}/>
     </div>
   );
