@@ -49,7 +49,7 @@ require('../../styles/survey.scss');
 
 var Survey = React.createClass({
     componentDidMount: function() {
-     document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
         $.ajax({
             type: 'GET',
             dataType: "json",
@@ -98,10 +98,7 @@ var Survey = React.createClass({
 
     renderSubmitButton: function() {
         return (
-                <Button id="personalButton" fill={true} plain={true} onClick={() => {
-                    this.submitAssesment();
-
-                }}>SUBMIT</Button>
+                <Button id="personalButton" fill={true} plain={true} onClick={this.submitAssesment}>SUBMIT</Button>
         );
     },
 
@@ -121,28 +118,25 @@ var Survey = React.createClass({
 
     submitAssesment: function() {
         let userData = {
-            answersList: this.state.test_taken_data
+            answers: this.state.test_taken_data
         };
 
         var D = JSON.stringify(userData);
-        console.log(D);
         $.ajax({
             type: 'POST',
-            dataType: "application/json",
+            dataType: "json",
             crossDomain: true,
-            url: 'http://35.184.252.96/benapi/surveys/'+ 1 + 'surveyTaken' + + this.props.params.surveyId,
+            url: 'http://35.184.252.96/benapi/surveys/'+ 1 + '/surveyTaken/' + this.props.params.surveyId,
             data: D,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             success: (response) => {
-               // console.log(response);
               this.goToResultPage();
             },
             error : (xhr, status) => {
-           //     alert('Sorry, there was a problem!');
-             this.goToResultPage();
+               alert('Sorry, there was a problem!'+ JSON.stringify(xhr));
             },
         });
 
