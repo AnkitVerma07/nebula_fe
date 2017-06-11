@@ -122,7 +122,6 @@ var Survey = React.createClass({
         };
 
         var D = JSON.stringify(userData);
-        console.log(D);
         $.ajax({
             type: 'POST',
             dataType: "json",
@@ -182,13 +181,13 @@ var Survey = React.createClass({
             this.setState({ options2: options2 });
         }
 
-        this.questionCallback(val, {
+        this.questionCallback(val.value, {
             id: "0"
         });
     },
     logChange2: function(val2) {
         this.setState({ val2 });
-        this.questionCallback(val2, {
+        this.questionCallback(val2.value, {
             id: "1"
         });
     },
