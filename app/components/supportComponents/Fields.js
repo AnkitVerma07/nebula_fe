@@ -374,7 +374,7 @@ var Fields = {
                 selectedStar: value
               });
               this.props.changeFunc( value);
-              this.props.answerCallback(value, this.props.question);
+              this.props.answerCallback(value.toString(), this.props.question);
             }
 
             return (<a key={value} onClick={onClick} className={className} preserveAspectRatio="xMinYMin" >
