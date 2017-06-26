@@ -33,6 +33,8 @@ function InputFieldChoice(props) {
         props.inputChange(value);
       }} />
     </FormField>
+
+
   );
 }
 
@@ -41,33 +43,43 @@ function NPSChoice(props) {
     <div className={props.question.id} >
         <input type="button" className="button-nps" value="Very Unlikely | 1" onClick={() => {
             props.answerCallback('1', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="2" onClick={() => {
             props.answerCallback('2', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="3" onClick={() => {
             props.answerCallback('3', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="4" onClick={() => {
             props.answerCallback('4', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="5" onClick={() => {
             props.answerCallback('5', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="6" onClick={() => {
             props.answerCallback('6', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="7" onClick={() => {
             props.answerCallback('7', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="8" onClick={() => {
             props.answerCallback('8', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="9" onClick={() => {
             props.answerCallback('9', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
         <input type="button" className="button-nps" value="10 | Very Likely" onClick={() => {
             props.answerCallback('10', props.question);
+            props.onValueChangeNextQuestion(props.index);
         }}/>
     </div>
   );
@@ -75,7 +87,7 @@ function NPSChoice(props) {
 
 function FiveStarChoice(props) {
     return (
-      <StarField fieldName="Rate your Job Experience" fieldID="ratingsBox" question={props.question} answerCallback={props.answerCallback} changeFunc={props.logChange} />
+      <StarField fieldName="" fieldID="ratingsBox" index={props.index} onValueChangeNextQuestion={props.onValueChangeNextQuestion} question={props.question} answerCallback={props.answerCallback} changeFunc={props.logChange} />
     );
 }
 
@@ -88,6 +100,7 @@ function DropDownChoice(props) {
       onChange={(value) => {
         props.logChange(value);
         props.answerCallback(value.value, props.question);
+        props.onValueChangeNextQuestion(props.index);
       }}
     />
   );
@@ -101,25 +114,30 @@ function SelectChoice(props) {
     <RadioButton className="radio-button" id={props.question.id + '-1'} label="Strongly Agree" onChange={() => {
       props.radiologChange('Strongly Agree', props.question.id + '-1', props.question.id);
       props.answerCallback('Strongly Agree', props.question);
+        props.onValueChangeNextQuestion(props.index);
     }}/>
 
     <RadioButton className="radio-button" id={props.question.id + '-2'} label="Agree" onChange={() => {
     props.radiologChange('Agree', props.question.id + '-2', props.question.id);
     props.answerCallback('Agree', props.question);
+        props.onValueChangeNextQuestion(props.index);
     }}/>
 
       <RadioButton className="radio-button" id={props.question.id + '-3'} label="Neither agree nor disagree" onChange={() => {
         props.radiologChange('Neither agree nor disagree', props.question.id + '-3', props.question.id);
         props.answerCallback('Neither agree nor disagree', props.question);
+          props.onValueChangeNextQuestion(props.index);
       }}/>
       <RadioButton className="radio-button" id={props.question.id + '-4'} label="Disagree" onChange={() => {
         props.radiologChange('Disagree', props.question.id + '-4', props.question.id);
         props.answerCallback('Disagree', props.question);
+          props.onValueChangeNextQuestion(props.index);
       }}/>
 
       <RadioButton className="radio-button" id={props.question.id + '-5'} label="Strongly Disagree" onChange={() => {
         props.radiologChange('Strongly Disagree', props.question.id + '-5', props.question.id);
         props.answerCallback('Strongly Disagree', props.question);
+          props.onValueChangeNextQuestion(props.index);
       }}/>
 
         </div>
@@ -169,20 +187,20 @@ function MultiSelectChoice(props) {
 function Choices(props) {
     const type = props.question.type;
     if (type === '5star') {
-        return <FiveStarChoice question={props.question} answerCallback={props.answerCallback} logChange={props.logChange}/>;
+        return <FiveStarChoice index={props.index} onValueChangeNextQuestion={props.onValueChangeNextQuestion} question={props.question} answerCallback={props.answerCallback} logChange={props.logChange}/>;
     } else if(type === 'multipleChoice') {
-      return <SelectChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} radiologChange={props.radiologChange}/>;
+      return <SelectChoice index={props.index} onValueChangeNextQuestion={props.onValueChangeNextQuestion} question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} radiologChange={props.radiologChange}/>;
     } else if(type === 'dropdown') {
-      return <DropDownChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange}/>;
+      return <DropDownChoice index={props.index} onValueChangeNextQuestion={props.onValueChangeNextQuestion} question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange}/>;
     } else if(type === 'checkBox') {
       return <MultiSelectChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange}/>;
     } else if(type === 'NPS') {
-      return <NPSChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange}/>;
+      return <NPSChoice index={props.index} onValueChangeNextQuestion={props.onValueChangeNextQuestion} question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange}/>;
     } else if(type === 'text') {
-      return <InputFieldChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} inputChange={props.inputChange}/>;
+      return <InputFieldChoice question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} inputChange={props.inputChange} />;
     }
     else if(type === 'dropdownWInput') {
-        return <DropDownWInput question={props.question} answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange} inputChange={props.inputChange} isEditing={props.isEditing}/>;
+        return <DropDownWInput question={props.question}  answerCallback={props.answerCallback} options={props.options} val={props.val} logChange={props.logChange} inputChange={props.inputChange} isEditing={props.isEditing}/>;
     } else if( type === 'N/A'){
         return <div></div>
     }
@@ -242,16 +260,15 @@ var Question = React.createClass({
   },
 
   render: function() {
-
     return (
             <div  className="question" ref="question">
               <p>
                 {this.props.question.order}
               </p>
-              <Label className="question_text">
-                {this.props.question.question}
-              </Label>
-                <Choices className="question-choices" question={this.props.question} answerCallback={this.props.answerCallback}  options={this.state.options} val={this.state.val} logChange={this.logChange} radiologChange={this.radiologChange} inputChange={this.inputChange} isEditing ={this.state.isEditing} npsChange={this.npsChange}/>
+                    <Label className="question_text">
+                        {this.props.question.question}
+                    </Label>
+                <Choices className="question-choices" index={this.props.index} onValueChangeNextQuestion={this.props.onValueChangeNextQuestion} question={this.props.question} answerCallback={this.props.answerCallback}  options={this.state.options} val={this.state.val} logChange={this.logChange} radiologChange={this.radiologChange} inputChange={this.inputChange} isEditing ={this.state.isEditing} npsChange={this.npsChange}/>
             </div>
     )
   }

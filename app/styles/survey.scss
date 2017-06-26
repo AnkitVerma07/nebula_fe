@@ -235,9 +235,9 @@ $mobileSocialMediaWidth: 30%;
         }
 
         .personal {
-          width: 950px;
+          width: 100%;
           margin: auto;
-          min-width:500px;
+          min-width:100px;
           padding-top: $contentPadding;
           min-height: 100px;
           height: 100%;
@@ -254,10 +254,34 @@ $mobileSocialMediaWidth: 30%;
             color: white;
           }
 
+
+
           .questions {
-            width: 100%;
-            height: 700px;
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            height: 480px;
             position: relative;
+
+              .previous_questions {
+                float: right;
+                width: 10%;
+
+                Button {
+                  background-color: transparent;
+                }
+
+
+                .up_arrow {
+                  border: solid black;
+                  border-width: 0 3px 3px 0;
+                  display: inline-block;
+                  padding: 3px;
+                  transform: rotate(-135deg);
+                  -webkit-transform: rotate(-135deg);
+                }
+
+                }
 
             .question {
 
@@ -267,16 +291,37 @@ $mobileSocialMediaWidth: 30%;
 
               .radio-button {
                 margin:10px;
-                float:left;/*Add float left*/
+                float:left;
+                display: inline-block;
+
+                  span {
+                    display: block;
+                  }
+
+
               }
 
               p {
                 font-size: 10px;
+                margin: 0;
+                padding-top: 75px;
               }
+             // .previous_questions {
 
-              .question_text {
-                font-size: 35px;
-              }
+                .question_text {
+                  font-size: 35px;
+                }
+
+              //  Button {
+              //    float: right;
+              //    width: 10%;
+              //    min-width:10px;
+              //    height: 30%;
+              //    min-height: 35px;
+              //  }
+              //}
+
+
 
               .question-choices {
                 font-size: 30px;
@@ -290,11 +335,16 @@ $mobileSocialMediaWidth: 30%;
             }
 
             .intro-para {
-              font-size: 23px;
+              font-size: 1.2em;
+              overflow: hidden;
+              margin: 0 auto;
+              margin-bottom: 25px;
             }
 
             h {
-              font-size: 45px;
+              font-size: 2.2em;
+              overflow: hidden;
+              margin: 10px;
             }
 
 

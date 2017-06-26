@@ -340,26 +340,6 @@ var Fields = {
                 selectedStar: undefined
             }
         },
-        /*componentDidMount: function() {
-            var starContainer = document.getElementsByClassName('stars')[0];
-            var stars = Array.prototype.slice.call(starContainer.children);
-            var totalStars = stars.length;
-          starContainer.addEventListener('click', (e) =>{
-                var index = stars.indexOf(e.target);
-                var count = count = totalStars - index;
-                for(var i = 0; i < stars.length; i++) {
-                    stars[i].classList.remove('is-selected');
-                }
-                this.setState({
-                    isStartsSelected: true
-                })
-                //e.target.classList.add('is-selected');
-
-            this.props.changeFunc( count);
-            this.props.answerCallback(count, this.props.question);
-            });
-
-        }, */
 
         renderStar: function(value) {
 
@@ -375,6 +355,7 @@ var Fields = {
               });
               this.props.changeFunc( value);
               this.props.answerCallback(value.toString(), this.props.question);
+                this.props.onValueChangeNextQuestion(this.props.index);
             }
 
             return (<a key={value} onClick={onClick} className={className} preserveAspectRatio="xMinYMin" >

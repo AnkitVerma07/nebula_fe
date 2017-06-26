@@ -103,17 +103,45 @@ var Survey = React.createClass({
     },
 
     renderNextButton: function(index) {
+        const nextQuestionObject = this.state.questions[index + 1];
+        const thenextQuestionObject = this.state.questions[index + 2];
+        const currentQuestion = this.state.questions[index];
+        if(currentQuestion.type === 'text' || currentQuestion.type === 'dropdownWInput' || currentQuestion.type === 'N/A' || currentQuestion.type === 'checkBox')
         return (
             <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
-                const nextQuestionObject = this.state.questions[index + 1];
+
                 if (nextQuestionObject) {
                     const nextQuestionRef = this.refs[nextQuestionObject.id];
                     if (nextQuestionRef){
                         nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                        this.refs[thenextQuestionObject.id].style.opacity = '0.3';
+                        this.refs[nextQuestionObject.id].style.opacity = null;
                     }
                 }
             }} label="NEXT" />
         );
+    },
+
+    onValueChangeNextQuestion: function(index) {
+                const nextQuestionObject = this.state.questions[index + 1];
+                const thenextQuestionObject = this.state.questions[index + 2];
+                if(!thenextQuestionObject){
+                    const nextQuestionRef = this.refs[nextQuestionObject.id];
+                    if (nextQuestionRef){
+                        nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                        this.refs[nextQuestionObject.id].style.opacity = null;
+                        nextQuestionRef.style.opacity = null;
+                    }
+                }
+                if (nextQuestionObject) {
+                    const nextQuestionRef = this.refs[nextQuestionObject.id];
+                    if (nextQuestionRef){
+                        nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                        this.refs[thenextQuestionObject.id].style.opacity = '0.3';
+                        this.refs[nextQuestionObject.id].style.opacity = null;
+                        nextQuestionRef.style.opacity = null;
+                    }
+                }
     },
 
     submitAssesment: function() {
@@ -148,6 +176,7 @@ var Survey = React.createClass({
         ReactRouter.browserHistory.push("/#/results");
         window.location.reload();
     },
+
     logChange: function(val) {
         this.setState({ val });
         let options2 = [];
@@ -193,6 +222,22 @@ var Survey = React.createClass({
         });
     },
 
+    previousQuestionCallback: function(index) {
+        if(index > 0)
+            return (
+                <Button ref="previousQuestion" fill={true} plain={true} onClick={() => {
+                    const nextQuestionObject = this.state.questions[index - 1];
+                    if (nextQuestionObject) {
+                        const nextQuestionRef = this.refs[nextQuestionObject.id];
+                        if (nextQuestionRef){
+                            nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                        }
+                    }
+                }}  >
+                    <i className="up_arrow"></i>
+                </Button>
+            );
+    },
 
   questionCallback: function(value, question) {
 
@@ -234,7 +279,7 @@ var Survey = React.createClass({
             <div id="question-tag" className="main">
                 <div className="title">
                     <header>
-                        <Heading tag="h2" uppercase={true}>
+                        <Heading tag="h3" uppercase={true}>
                             {this.props.header}
                         </Heading>
                     </header>
@@ -253,9 +298,15 @@ var Survey = React.createClass({
                             Please invest five minutes to share your impression of the company you may be interviewing with. The information will be used to guide our efforts in accomplishing our mission only and your individual responses will not be shared with the organization.
                         </p>
                         <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
-                                const nextQuestionRef = this.refs['question-1'];
+
+                            const nextQuestionRef = this.refs['question-1'];
+                            const nextQuestionObject = this.state.questions[0];
+                            const thenextQuestionRef = this.refs[nextQuestionObject.id];
                                 if (nextQuestionRef){
                                     nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                                    thenextQuestionRef.style.opacity = '0.3';
+                                    nextQuestionRef.style.opacity = null;
+
                                 }
                         }} label="NEXT" />
                         </div>
@@ -293,10 +344,14 @@ var Survey = React.createClass({
                             </div>
                             <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
                                 const nextQuestionObject = this.state.questions[0];
+                                const thenextQuestionObject = this.state.questions[1];
                                 if (nextQuestionObject) {
                                     const nextQuestionRef = this.refs[nextQuestionObject.id];
+                                    const thenextQuestionRef = this.refs[thenextQuestionObject.id];
                                     if (nextQuestionRef){
                                         nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                                        thenextQuestionRef.style.opacity = '0.3';
+                                        nextQuestionRef.style.opacity = null;
                                     }
                                 }
                             }} label="NEXT" />
@@ -306,12 +361,13 @@ var Survey = React.createClass({
 
                     <div className="personal" ref="personal">
                       {this.state.questions.map((question, index) => {
-
-
                         return (
                             <div className='questions' ref='questions'>
                               <div className={question.id} ref={question.id}>
-                                <Question ref={question.id} answerCallback={this.questionCallback} question={question} key={parseInt(question.id)} />
+                                  <div className="previous_questions">
+                                      {this.previousQuestionCallback(index)}
+                                  </div>
+                                <Question ref={question.id} index={index} onValueChangeNextQuestion={this.onValueChangeNextQuestion} answerCallback={this.questionCallback} question={question} key={index} />
                               </div>
                                 { (index == this.state.questions.length-1) ? this.renderSubmitButton() : this.renderNextButton(index) }
                             </div>
