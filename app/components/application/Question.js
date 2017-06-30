@@ -148,16 +148,13 @@ function DropDownWInput(props){
 return (
     <div>
          <div>
-        <Select
-            simpleValue
-            placeholder="pick one..."
-            value={props.val}
-            options={props.options}
-            onChange={(value) => {
-                props.logChange(value);
-                props.answerCallback(value.value, props.question);
-            }}
-        />
+             <Select placeHolder='select..'
+                            options={props.options}
+                            value={props.val}
+                            onChange={(value) => {
+                                props.logChange(value);
+                                props.answerCallback(value.value, props.question);
+                            }} />
          </div>
         <div>
         <FormField className={props.question.question}>
@@ -224,6 +221,7 @@ var Question = React.createClass({
 
   },
   getInitialState: function() {
+
     return {
         isEditing: '',
         options: [],
@@ -231,6 +229,7 @@ var Question = React.createClass({
     }
   },
   logChange: function(val) {
+      this.setState({ val });
       if(val === 'other'){
           this.setState({
               isEditing: 'readOnly'
@@ -242,7 +241,7 @@ var Question = React.createClass({
       }
 
 
-    this.setState({ val });
+
   },
   radiologChange: function(val, id, questionId) {
     document.getElementById(questionId + '-1').checked = false;

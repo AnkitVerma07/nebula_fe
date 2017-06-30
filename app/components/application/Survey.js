@@ -15,6 +15,9 @@ var Button = require('grommet/components/Button');
 var FormField = require('grommet/components/FormField');
 //var CheckBox = require('grommet/components/CheckBox');
 
+
+var ReactCSSTransitionGroup =  require('react-addons-css-transition-group');
+
 var Question = require('../../components/application/Question.js');
 
 var Select = require('react-select');
@@ -178,6 +181,7 @@ var Survey = React.createClass({
     },
 
     logChange: function(val) {
+
         this.setState({ val });
         let options2 = [];
         if(val.value === 'EMEA (Europe, Middle East & Africa'){
@@ -234,7 +238,7 @@ var Survey = React.createClass({
                         }
                     }
                 }}  >
-                    <i className="up_arrow"></i>
+                    <i className="up_arrow"/>
                 </Button>
             );
     },
@@ -267,6 +271,7 @@ var Survey = React.createClass({
   },
 
     render: function() {
+
         return (
             <div className="survey">
                 <Grommet>
@@ -285,12 +290,14 @@ var Survey = React.createClass({
                     </header>
                 </div>
                 <div className="content">
-
                     <div className="personal" ref="personal">
                         <div className='questions' ref='questions'>
-                        <h>
-                            {this.state.survey.title}
-                        </h>
+                            <ReactCSSTransitionGroup transitionName="anim" transitionAppear={true} transitionAppearTimeout={5000} transitionEnter={false} transitionLeave={false}>
+                                <h className="survey_title">
+                                    {this.state.survey.title}
+                                </h>
+                            </ReactCSSTransitionGroup>
+
                         <p className="intro-para">
                             Our mission is to unite the most talented people with the most rewarding opportunities. Your experience is very important to us, and we would love to learn more about it as you work with us.
                         </p>
@@ -357,8 +364,6 @@ var Survey = React.createClass({
                             }} label="NEXT" />
                         </div>
                     </div>
-
-
                     <div className="personal" ref="personal">
                       {this.state.questions.map((question, index) => {
                         return (
