@@ -148,13 +148,16 @@ function DropDownWInput(props){
 return (
     <div>
          <div>
-             <Select placeHolder='select..'
-                            options={props.options}
-                            value={props.val}
-                            onChange={(value) => {
-                                props.logChange(value);
-                                props.answerCallback(value.value, props.question);
-                            }} />
+           <Select
+             simpleValue
+             placeholder="pick one..."
+             value={props.val}
+             options={props.options}
+             onChange={(value) => {
+               props.logChange(value);
+               props.answerCallback(value.value, props.question);
+             }}
+           />
          </div>
         <div>
         <FormField className={props.question.question}>
