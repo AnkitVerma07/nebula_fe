@@ -158,6 +158,18 @@ return (
                props.answerCallback(value.value, props.question);
              }}
            />
+             <select id="dropdown_input_select" className="dropdown_input_select"  onChange={(event) => {
+                props.logChange(event.target.value);
+                props.answerCallback(event.target.value, props.question);
+             }}>
+                 {
+                     props.options.map((option, index) => {
+                         return(
+                             <option className={index} value={option.value}>{option.label}</option>
+                         )
+                     })
+                 }
+             </select>
          </div>
         <div>
         <FormField className={props.question.question}>

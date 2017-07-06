@@ -52,7 +52,7 @@ require('../../styles/survey.scss');
 
 var Survey = React.createClass({
     componentDidMount: function() {
-   document.body.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
         $.ajax({
             type: 'GET',
             dataType: "json",
