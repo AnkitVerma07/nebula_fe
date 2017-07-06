@@ -148,16 +148,6 @@ function DropDownWInput(props){
 return (
     <div>
          <div>
-           <Select
-             simpleValue
-             placeholder="pick one..."
-             value={props.val}
-             options={props.options}
-             onChange={(value) => {
-               props.logChange(value);
-               props.answerCallback(value.value, props.question);
-             }}
-           />
              <select id="dropdown_input_select" className="dropdown_input_select"  onChange={(event) => {
                 props.logChange(event.target.value);
                 props.answerCallback(event.target.value, props.question);
