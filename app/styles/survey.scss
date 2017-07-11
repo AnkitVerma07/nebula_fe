@@ -271,6 +271,20 @@ $mobileSocialMediaWidth: 30%;
             text-align: center;
             height: 510px;
             position: relative;
+            opacity: 0.3;
+            top: 40px;
+            transition: all 0.5s ease-in-out;
+
+            &.active {
+              opacity: 1;
+              top: 0;
+            }
+
+
+            &.previous {
+              top: -40px;
+            }
+
 
               .previous_questions {
                 float: right;
@@ -282,6 +296,7 @@ $mobileSocialMediaWidth: 30%;
 
 
                 .up_arrow {
+                  margin-top: 40px;
                   border: solid black;
                   border-width: 0 3px 3px 0;
                   display: inline-block;

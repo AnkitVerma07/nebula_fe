@@ -76,6 +76,7 @@ var Survey = React.createClass({
     },
     getInitialState: function() {
         return {
+          activeIndex: 0,
             questions: [],
           test_taken_data: [],
             score: 0,
@@ -117,10 +118,11 @@ var Survey = React.createClass({
                     const nextQuestionRef = this.refs[nextQuestionObject.id];
                     if (nextQuestionRef){
                         nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
-                        this.refs[thenextQuestionObject.id].style.opacity = '0.3';
-                        this.refs[nextQuestionObject.id].style.opacity = null;
+                        //this.refs[thenextQuestionObject.id].style.opacity = '0.3';
+                        //this.refs[nextQuestionObject.id].style.opacity = null;
                     }
                 }
+              this.incrementActiveIndex();
             }} label="NEXT" />
         );
     },
@@ -132,19 +134,20 @@ var Survey = React.createClass({
                     const nextQuestionRef = this.refs[nextQuestionObject.id];
                     if (nextQuestionRef){
                         nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
-                        this.refs[nextQuestionObject.id].style.opacity = null;
-                        nextQuestionRef.style.opacity = null;
+                        //this.refs[nextQuestionObject.id].style.opacity = null;
+                        //nextQuestionRef.style.opacity = null;
                     }
                 }
                 if (nextQuestionObject) {
                     const nextQuestionRef = this.refs[nextQuestionObject.id];
                     if (nextQuestionRef){
                         nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
-                        this.refs[thenextQuestionObject.id].style.opacity = '0.3';
-                        this.refs[nextQuestionObject.id].style.opacity = null;
-                        nextQuestionRef.style.opacity = null;
+                        //this.refs[thenextQuestionObject.id].style.opacity = '0.3';
+                        //this.refs[nextQuestionObject.id].style.opacity = null;
+                        //nextQuestionRef.style.opacity = null;
                     }
                 }
+      this.incrementActiveIndex();
     },
 
     submitAssesment: function() {
@@ -237,6 +240,7 @@ var Survey = React.createClass({
                             nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
                         }
                     }
+                    this.decrementActiveIndex();
                 }}  >
                     <i className="up_arrow"/>
                 </Button>
@@ -270,6 +274,14 @@ var Survey = React.createClass({
     });
   },
 
+  incrementActiveIndex: function() {
+    this.setState({ activeIndex: this.state.activeIndex + 1 });
+  },
+
+  decrementActiveIndex: function() {
+    this.setState({ activeIndex: this.state.activeIndex - 1 });
+  },
+
     render: function() {
 
         return (
@@ -291,12 +303,12 @@ var Survey = React.createClass({
                 </div>
                 <div className="content">
                     <div className="personal" ref="personal">
-                        <div className='questions' ref='questions'>
-                            <ReactCSSTransitionGroup transitionName="anim" transitionAppear={true} transitionAppearTimeout={5000} transitionEnter={false} transitionLeave={false}>
+                        <div className={'questions ' + (this.state.activeIndex === 0 ? 'active' : '')} ref='questions'>
+                            {/*<ReactCSSTransitionGroup transitionName="anim" transitionAppear={true} transitionAppearTimeout={5000} transitionEnter={false} transitionLeave={false}>*/}
                                 <h className="survey_title">
                                     {this.state.survey.title}
                                 </h>
-                            </ReactCSSTransitionGroup>
+                            {/*</ReactCSSTransitionGroup>*/}
 
                         <p className="intro-para">
                             Our mission is to unite the most talented people with the most rewarding opportunities. Your experience is very important to us, and we would love to learn more about it as you work with us.
@@ -305,69 +317,75 @@ var Survey = React.createClass({
                             Please invest five minutes to share your impression of the company you may be interviewing with. The information will be used to guide our efforts in accomplishing our mission only and your individual responses will not be shared with the organization.
                         </p>
                         <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
-
                             const nextQuestionRef = this.refs['question-1'];
                             const nextQuestionObject = this.state.questions[0];
                             const thenextQuestionRef = this.refs[nextQuestionObject.id];
-                                if (nextQuestionRef){
-                                    nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
-                                    thenextQuestionRef.style.opacity = '0.3';
-                                    nextQuestionRef.style.opacity = null;
+                                if (nextQuestionRef) {
+                                  nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                                  //thenextQuestionRef.style.opacity = '0.3';
+                                  //nextQuestionRef.style.opacity = null;
 
                                 }
-                        }} label="NEXT" />
-                        </div>
-                    </div>
-
-                    <div className="personal" ref="personal">
-                        <div className='questions' ref='questions'>
-                            <div  className="question" ref="question-1">
-                                <p>
-                                    0
-                                </p>
-                                <Label className="question_text">
-                                    What is your Location?
-                                </Label>
-                                <Select
-                                    name="form-field-name"
-                                    value={this.state.val}
-                                    options={this.state.options}
-                                    onChange={(value) => {
-                                        this.logChange(value);
-                                    }}
-                                />
-
-                                <Label className="question_text">
-                                    Which Country/City?
-                                </Label>
-                                <Select
-                                    name="form-field-name"
-                                    value={this.state.val2}
-                                    options={this.state.options2}
-                                    onChange={(value) => {
-                                        this.logChange2(value);
-                                    }}
-                                />
-                            </div>
-                            <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
-                                const nextQuestionObject = this.state.questions[0];
-                                const thenextQuestionObject = this.state.questions[1];
-                                if (nextQuestionObject) {
-                                    const nextQuestionRef = this.refs[nextQuestionObject.id];
-                                    const thenextQuestionRef = this.refs[thenextQuestionObject.id];
-                                    if (nextQuestionRef){
-                                        nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
-                                        thenextQuestionRef.style.opacity = '0.3';
-                                        nextQuestionRef.style.opacity = null;
-                                    }
-                                }
+                                this.incrementActiveIndex();
                             }} label="NEXT" />
                         </div>
                     </div>
+
+                  <div className="personal" ref="personal">
+                    <div className={'questions ' + (this.state.activeIndex === 1 ? 'active' : '')} ref='questions'>
+                      <div  className="question" ref="question-1">
+                        <p>
+                          0
+                        </p>
+                        <Label className="question_text">
+                          What is your Location?
+                        </Label>
+                        <Select
+                          name="form-field-name"
+                          value={this.state.val}
+                          options={this.state.options}
+                          onChange={(value) => {
+                            this.logChange(value);
+                          }}
+                        />
+
+                        <Label className="question_text">
+                          Which Country/City?
+                        </Label>
+                        <Select
+                          name="form-field-name"
+                          value={this.state.val2}
+                          options={this.state.options2}
+                          onChange={(value) => {
+                            this.logChange2(value);
+                          }}
+                        />
+                      </div>
+                      <Button ref="nextQuestion" fill={true} plain={true} onClick={() => {
+                        const nextQuestionObject = this.state.questions[0];
+                        const thenextQuestionObject = this.state.questions[1];
+                        if (nextQuestionObject) {
+                          const nextQuestionRef = this.refs[nextQuestionObject.id];
+                          const thenextQuestionRef = this.refs[thenextQuestionObject.id];
+                          if (nextQuestionRef){
+                            nextQuestionRef.scrollIntoView({block: "start", behavior: "smooth"});
+                          //  thenextQuestionRef.style.opacity = '0.3';
+                         //   nextQuestionRef.style.opacity = null;
+                          }
+                        }
+                        this.incrementActiveIndex();
+                            }} label="NEXT" />
+                        </div>
+                    </div>
+
                     <div className="personal" ref="personal">
                       {this.state.questions.map((question, index) => {
                         return (
-                            <div className='questions' ref='questions'>
+                            <div className={
+                              'questions ' +
+                              (this.state.activeIndex === index + 2 ? 'active ' : '') +
+                              (this.state.activeIndex === index + 3 ? 'previous' : '')
+                            } ref='questions'>
                               <div className={question.id} ref={question.id}>
                                   <div className="previous_questions">
                                       {this.previousQuestionCallback(index)}
